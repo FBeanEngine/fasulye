@@ -17,6 +17,8 @@ int main(void)
     while (!WindowShouldClose())
     {
 
+        BeginDrawing();
+
         if (GetKeyPressed() == KEY_F) {
             if (IsWindowFullscreen()) {
                 ToggleFullscreen();
@@ -26,6 +28,8 @@ int main(void)
                 SetWindowSize(screenWidth, screenHeight);
             }
         }
+
+
 
         ClearBackground(BLACK);
 
