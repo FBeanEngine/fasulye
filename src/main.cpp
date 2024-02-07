@@ -35,5 +35,5 @@ int main(void)
     }
 
     CloseWindow(); 
-    return -1;
+    return 0;
 }
