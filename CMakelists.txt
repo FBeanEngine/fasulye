@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(fasulye)
 
+set(CMAKE_BUILD_TYPE Debug)
 set(PROJECT_DIR ${CMAKE_SOURCE_DIR})
 
 set(PROJECT_INCLUDE_DIR ${PROJECT_DIR}/include)
@@ -8,7 +9,8 @@ set(PROJECT_INCLUDE_DIR ${PROJECT_DIR}/include)
 set(PROJECT_SOURCE_DIR ${PROJECT_DIR}/src)
 
 set(PROJECT_SOURCES 
-        ${PROJECT_SOURCE_DIR}/main.cpp)
+        ${PROJECT_SOURCE_DIR}/main.cpp
+        ${PROJECT_SOURCE_DIR}/FGame.cpp)
 
 # Dependencies
 include(FetchContent)
@@ -22,7 +24,7 @@ FetchContent_Declare(
 set(BUILD_EXAMPLES OFF CACHE INTERNAL "")
 FetchContent_MakeAvailable(raylib)
 
-
+include_directories(${PROJECT_INCLUDE_DIR})
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 target_link_libraries(${PROJECT_NAME} raylib)
