@@ -14,8 +14,8 @@ public:
     int LoadScene(int index);
 
 private:
-    uint8_t m_loadadSceneCount;
-    uint8_t m_sceneCount;
+    int m_loadadSceneCount;
+    int m_sceneCount;
 
     int m_active_scene;
     std::vector<FScene> m_sceneList;

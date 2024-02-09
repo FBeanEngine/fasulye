@@ -2,6 +2,7 @@
 #include <vector>
 #include "enums.h"
 #include "raylib.h"
+#include "FObject.h"
 
 class FScene
 {

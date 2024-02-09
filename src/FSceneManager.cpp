@@ -11,12 +11,14 @@ int FSceneManager::AddScene(FScene scene)
 {
     m_sceneList.push_back(scene);
     m_sceneCount += 1;
+    return m_sceneList.size() - 1;
 }
 
 int FSceneManager::RemoveScene(int index)
 {
     m_sceneList.erase(m_sceneList.begin() + index);
     m_sceneCount -= 1;
+    return index;
 }
 
 FScene FSceneManager::GetScene(int index)
@@ -32,4 +34,5 @@ FScene FSceneManager::GetActiveScene()
 int FSceneManager::LoadScene(int index)
 {
     m_active_scene = index;
+    return index;
 }
