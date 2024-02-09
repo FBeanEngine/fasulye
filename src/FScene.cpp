@@ -1,4 +1,5 @@
 #include "FScene.h"
+#include "FObject.h"
 
 FScene::FScene(SceneType type)
 {
@@ -7,13 +8,13 @@ FScene::FScene(SceneType type)
 
 int FScene::AddObject(FObject object)
 {
-    this->objects.insert(object);
-    return this->objects.size() - 1;
+    objects.push_back(object);
+    return objects.size() - 1;
 }
 
 int FScene::RemoveObject(int index)
 {
-    if (index >= this->objects.size())
+    if (index >= objects.size())
     {
         return 1;
     }
@@ -21,24 +22,23 @@ int FScene::RemoveObject(int index)
     {
         return 1;
     }
-
-    this->objects.erase(index);
+    objects.erase(objects.begin() + index);
 
     return 0;
 }
 
 FObject FScene::GetObject(int index)
 {
-    if (index >= this->objects.size())
+    if (index >= objects.size())
     {
-        return this->objects[0];
+        return objects[0];
     }
     else if (index < 0)
     {
-        return this->objects[0];
+        return objects[0];
     }
 
-    return this->objects[index];
+    return objects[index];
 }
 
 void FScene::Physics()
@@ -48,16 +48,16 @@ void FScene::Physics()
 
 void FScene::Logic()
 {
-    for (int i = 0; i < this->objects.size(); i++)
+    for (int i = 0; i < objects.size(); i++)
     {
-        this->objects[i]->Update();
+        objects[i].Update();
     }
 }
 
 void FScene::Render()
 {
-    for (int i = 0; i < this->objects.size(); i++)
+    for (int i = 0; i < objects.size(); i++)
     {
-        this->objects[i]->Draw();
+        objects[i].Draw();
     }
 }

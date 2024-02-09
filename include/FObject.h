@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "raylb.h"
+#include "raylib.h"
 #include "FStruct.h"
 
 class FObject
@@ -20,4 +20,4 @@ public:
 
 private:
     Texture texture;
-}
+};
