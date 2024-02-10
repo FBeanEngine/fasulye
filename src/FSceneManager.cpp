@@ -1,4 +1,6 @@
 #include "FSceneManager.h"
+#include <memory>
+#include <iostream>
 
 FSceneManager::FSceneManager()
 {
@@ -7,9 +9,9 @@ FSceneManager::FSceneManager()
     m_active_scene = -1;
 }
 
-int FSceneManager::AddScene(FScene scene)
+int FSceneManager::AddScene(std::unique_ptr<FScene> scene)
 {
-    m_sceneList.push_back(scene);
+    m_sceneList.push_back(std::move(scene));
     m_sceneCount += 1;
     return m_sceneList.size() - 1;
 }
@@ -21,14 +23,20 @@ int FSceneManager::RemoveScene(int index)
     return index;
 }
 
-FScene FSceneManager::GetScene(int index)
+std::unique_ptr<FScene> FSceneManager::GetScene(int index)
 {
-    return m_sceneList[index];
+    return std::move(m_sceneList[index]);
 }
 
-FScene FSceneManager::GetActiveScene()
+std::unique_ptr<FScene> &FSceneManager::GetActiveScene()
 {
     return m_sceneList[m_active_scene];
+}
+
+int FSceneManager::SetActiveScene(int index)
+{
+    m_active_scene = index;
+    return index;
 }
 
 int FSceneManager::LoadScene(int index)

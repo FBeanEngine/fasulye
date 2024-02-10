@@ -1,9 +1,20 @@
 #include "FScene.h"
 #include "FObject.h"
+#include "FPlayer.h"
+#include <iostream>
 
 FScene::FScene(SceneType type)
 {
     this->type = type;
+    if (type == SceneType::SpaceStation)
+    {
+        player = std::unique_ptr<FPlayer>(new FPlayer({100, 100}));
+    }
+}
+
+FScene::~FScene()
+{
+    std::cout << "FScene destructor: " << std::endl;
 }
 
 int FScene::AddObject(FObject object)

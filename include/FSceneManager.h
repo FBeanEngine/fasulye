@@ -1,16 +1,18 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include "FScene.h"
 
 class FSceneManager
 {
 public:
     FSceneManager();
-    int AddScene(FScene scene);
+    int AddScene(std::unique_ptr<FScene> scene);
     int RemoveScene(int index);
-    FScene GetScene(int index);
+    std::unique_ptr<FScene> GetScene(int index);
 
-    FScene GetActiveScene();
+    std::unique_ptr<FScene> &GetActiveScene();
+    int SetActiveScene(int index);
     int LoadScene(int index);
 
 private:
@@ -18,5 +20,5 @@ private:
     int m_sceneCount;
 
     int m_active_scene;
-    std::vector<FScene> m_sceneList;
+    std::vector<std::unique_ptr<FScene>> m_sceneList;
 };
