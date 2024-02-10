@@ -12,6 +12,8 @@ public:
     int AddObject(FObject object);
     int RemoveObject(int index);
     FObject GetObject(int index);
+    Camera2D camera;
+
 
     void Physics();
     void Logic();

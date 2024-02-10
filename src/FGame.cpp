@@ -1,5 +1,6 @@
-#include "FGame.h"
+#include "FScene.h"
 #include "raylib.h"
+#include "FGame.h"
 
 FGame::FGame()
 {
@@ -16,16 +17,14 @@ void FGame::Run()
 {
     while (!WindowShouldClose())
     {
+        FScene scene = SceneMenager.GetActiveScene();
         // Physics update loop
-
+        scene.Physics();
         // Game logic update loop
-
+        scene.Logic();
         // Drawing loop
-        BeginDrawing();
-
-        ClearBackground(BLACK);
-        DrawText("Fasulye", GetScreenWidth() / 2, GetScreenHeight() / 2, 20, WHITE);
-
-        EndDrawing();
+        BeginMode2D(scene.camera);
+        scene.Render();
+        EndMode2D();
     }
 }
