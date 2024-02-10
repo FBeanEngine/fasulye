@@ -1,4 +1,6 @@
 #include "FPlayer.h"
+#include "raylib.h"
+#include <iostream>
 
 FPlayer::FPlayer(Vector2 position)
 {
@@ -11,6 +13,47 @@ FPlayer::FPlayer(Vector2 position)
 // FPlayer::FPlayer(Vector2 position, Texture texture){
 // TODO
 // }
+
+ void FPlayer::Update() {
+	bool isVerticalUp = false;
+	bool isVerticalDown = false;
+
+	if (IsKeyDown(KEY_W)) {
+		this->position.y -= 5;
+		isVerticalUp = true;
+	}
+	else if (IsKeyDown(KEY_S)) {
+		this->position.y += 5;
+		isVerticalDown = true;
+	}
+
+	if (IsKeyDown(KEY_A)) {
+		if (isVerticalUp) { 
+			this->position.x -= 2.5;
+			this->position.y += 2.5;
+		} else if (isVerticalDown) {
+			this->position.x -= 2.5;
+			this->position.y -= 2.5;
+		}
+		else
+		this->position.x -= 5;
+	}
+	else if (IsKeyDown(KEY_D)) {
+		if (isVerticalUp) { 
+			this->position.x += 2.5;
+			this->position.y += 2.5;
+		} else if (isVerticalDown) {
+			this->position.x += 2.5;
+			this->position.y -= 2.5;
+		}
+		this->position.x += 5;
+	}
+}
+
+void FPlayer::Draw() {
+	std::cout<< "Draw call for player" << std::endl;
+	DrawCircle(this->position.x, this->position.y, 50, RED);
+}
 
 void FPlayer::AddItem(FItem item)
 {

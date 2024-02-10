@@ -1,6 +1,7 @@
 #include "FScene.h"
 #include "FObject.h"
 #include "FPlayer.h"
+#include "raylib.h"
 #include <iostream>
 
 FScene::FScene(SceneType type)
@@ -8,7 +9,7 @@ FScene::FScene(SceneType type)
     this->type = type;
     if (type == SceneType::SpaceStation)
     {
-        player = std::unique_ptr<FPlayer>(new FPlayer({100, 100}));
+        this->player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
     }
 }
 
@@ -58,7 +59,9 @@ void FScene::Physics()
 }
 
 void FScene::Logic()
-{
+{   
+    this->player->Update();
+
     for (int i = 0; i < objects.size(); i++)
     {
         objects[i].Update();
@@ -68,7 +71,9 @@ void FScene::Logic()
 void FScene::Render()
 {
     for (int i = 0; i < objects.size(); i++)
-    {
+    {   
         objects[i].Draw();
     }
+
+    this->player->Draw();
 }

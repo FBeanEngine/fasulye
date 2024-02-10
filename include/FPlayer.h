@@ -14,6 +14,9 @@ public:
     int GetHP();
     int Attack();
 
+    void Update();
+    void Draw();
+
 private:
     std::vector<FItem> m_inventory;
     int m_hp;

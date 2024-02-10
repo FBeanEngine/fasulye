@@ -1,6 +1,5 @@
 #include "FSceneManager.h"
 #include <memory>
-#include <iostream>
 
 FSceneManager::FSceneManager()
 {

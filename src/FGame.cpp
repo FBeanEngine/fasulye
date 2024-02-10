@@ -26,20 +26,20 @@ void FGame::Run()
     std::cout << "FGame::Run()" << std::endl;
     while (!WindowShouldClose())
     {
-        BeginDrawing();
 
-        ClearBackground(BLACK);
-        DrawText("Fasulye", GetScreenWidth() / 2, GetScreenHeight() / 2, 20, WHITE);
+        //DrawText("Fasulye", GetScreenWidth() / 2, GetScreenHeight() / 2, 20, WHITE);
 
-        EndDrawing();
         std::unique_ptr<FScene> &activeScene = SceneMenager.GetActiveScene();
         // Physics update loop
         activeScene->Physics();
         // Game logic update loop
         activeScene->Logic();
         // Drawing loop
-        BeginMode2D(activeScene->camera);
+        ClearBackground(BLACK);
+        BeginDrawing();
+        //BeginMode2D(activeScene->camera);
         activeScene->Render();
-        EndMode2D();
+        EndDrawing();
+        //EndMode2D();
     }
 }
