@@ -15,40 +15,48 @@ FPlayer::FPlayer(Vector2 position)
 // }
 
  void FPlayer::Update() {
-	bool isVerticalUp = false;
-	bool isVerticalDown = false;
+    bool isVerticalUp = false;
+    bool isVerticalDown = false;
+    bool isHorizontalLeft = false;
+    bool isHorizontalRight = false;
 
-	if (IsKeyDown(KEY_W)) {
-		this->position.y -= 5;
-		isVerticalUp = true;
-	}
-	else if (IsKeyDown(KEY_S)) {
-		this->position.y += 5;
-		isVerticalDown = true;
-	}
+    if (IsKeyDown(KEY_W)) {
+        this->position.y -= 5;
+        isVerticalUp = true;
+    }
+    else if (IsKeyDown(KEY_S)) {
+        this->position.y += 5;
+        isVerticalDown = true;
+    }
 
-	if (IsKeyDown(KEY_A)) {
-		if (isVerticalUp) { 
-			this->position.x -= 2.5;
-			this->position.y += 2.5;
-		} else if (isVerticalDown) {
-			this->position.x -= 2.5;
-			this->position.y -= 2.5;
-		}
-		else
-		this->position.x -= 5;
-	}
-	else if (IsKeyDown(KEY_D)) {
-		if (isVerticalUp) { 
-			this->position.x += 2.5;
-			this->position.y += 2.5;
-		} else if (isVerticalDown) {
-			this->position.x += 2.5;
-			this->position.y -= 2.5;
-		}
-		this->position.x += 5;
-	}
+    if (IsKeyDown(KEY_A)) {
+        this->position.x -= 5;
+        isHorizontalLeft = true;
+    }
+    else if (IsKeyDown(KEY_D)) {
+        this->position.x += 5;
+        isHorizontalRight = true;
+    }
+
+    // Diagonal movement
+    if (isVerticalUp && isHorizontalLeft) {
+        this->position.x += 2.5;
+        this->position.y += 2.5;
+    }
+    else if (isVerticalUp && isHorizontalRight) {
+        this->position.x -= 2.5;
+        this->position.y += 2.5;
+    }
+    else if (isVerticalDown && isHorizontalLeft) {
+        this->position.x += 2.5;
+        this->position.y -= 2.5;
+    }
+    else if (isVerticalDown && isHorizontalRight) {
+        this->position.x -= 2.5;
+        this->position.y -= 2.5;
+    }
 }
+
 
 void FPlayer::Draw() {
 	std::cout<< "Draw call for player" << std::endl;

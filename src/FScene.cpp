@@ -9,8 +9,12 @@ FScene::FScene(SceneType type)
     this->type = type;
     if (type == SceneType::SpaceStation)
     {
-        this->player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
+        player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
     }
+    camera.target = player->position;
+    camera.offset = (Vector2){static_cast<float>(GetScreenWidth() / 2),static_cast<float>(GetScreenHeight() / 2)};
+    camera.rotation = 0;
+    camera.zoom = 1;
 }
 
 FScene::~FScene()
@@ -60,8 +64,8 @@ void FScene::Physics()
 
 void FScene::Logic()
 {   
-    this->player->Update();
-
+    player->Update();
+    camera.target = player->position;
     for (int i = 0; i < objects.size(); i++)
     {
         objects[i].Update();
