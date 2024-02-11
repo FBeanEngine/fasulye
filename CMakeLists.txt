@@ -32,6 +32,15 @@ FetchContent_MakeAvailable(raylib)
 include_directories(${PROJECT_INCLUDE_DIR})
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/resources)
+add_custom_target(copy_resources ALL
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${PROJECT_DIR}/resources
+        ${PROJECT_BINARY_DIR}/resources
+        COMMENT "Copying resources into binary directory")
+
+add_dependencies(fasulye copy_resources)
+
 target_link_libraries(${PROJECT_NAME} raylib)
 
 
