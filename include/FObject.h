@@ -18,6 +18,6 @@ public:
     bool enableBoundingBox;
     std::vector<FObject> collidedObjects;
 
-private:
+protected:
     Texture texture;
 };
