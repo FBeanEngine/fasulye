@@ -4,90 +4,95 @@
 
 FPlayer::FPlayer(Vector2 position)
 {
-	this->position = position;
-	m_hp = 100;
-	m_activeGun = -1;
-	isDead = false;
+    this->position = position;
+    m_hp = 100;
+    m_activeGun = -1;
+    isDead = false;
 }
 
 // FPlayer::FPlayer(Vector2 position, Texture texture){
 // TODO
 // }
 
- void FPlayer::Update() {
+void FPlayer::Update()
+{
     bool isVerticalUp = false;
     bool isVerticalDown = false;
     bool isHorizontalLeft = false;
     bool isHorizontalRight = false;
 
-    if (IsKeyDown(KEY_W)) {
+    if (IsKeyDown(KEY_W))
+    {
         this->position.y -= 5;
         isVerticalUp = true;
     }
-    else if (IsKeyDown(KEY_S)) {
+    else if (IsKeyDown(KEY_S))
+    {
         this->position.y += 5;
         isVerticalDown = true;
     }
 
-    if (IsKeyDown(KEY_A)) {
+    if (IsKeyDown(KEY_A))
+    {
         this->position.x -= 5;
         isHorizontalLeft = true;
     }
-    else if (IsKeyDown(KEY_D)) {
+    else if (IsKeyDown(KEY_D))
+    {
         this->position.x += 5;
         isHorizontalRight = true;
     }
 
     // Diagonal movement
-    if (isVerticalUp && isHorizontalLeft) {
-        this->position.x += 2.5;
-        this->position.y += 2.5;
-    }
-    else if (isVerticalUp && isHorizontalRight) {
-        this->position.x -= 2.5;
-        this->position.y += 2.5;
-    }
-    else if (isVerticalDown && isHorizontalLeft) {
-        this->position.x += 2.5;
-        this->position.y -= 2.5;
-    }
-    else if (isVerticalDown && isHorizontalRight) {
-        this->position.x -= 2.5;
-        this->position.y -= 2.5;
-    }
+    // if (isVerticalUp && isHorizontalLeft) {
+    //     this->position.x += 2.5;
+    //     this->position.y += 2.5;
+    // }
+    // else if (isVerticalUp && isHorizontalRight) {
+    //     this->position.x -= 2.5;
+    //     this->position.y += 2.5;
+    // }
+    // else if (isVerticalDown && isHorizontalLeft) {
+    //     this->position.x += 2.5;
+    //     this->position.y -= 2.5;
+    // }
+    // else if (isVerticalDown && isHorizontalRight) {
+    //     this->position.x -= 2.5;
+    //     this->position.y -= 2.5;
+    // }
 }
 
-
-void FPlayer::Draw() {
-	std::cout<< "Draw call for player" << std::endl;
-	DrawCircle(this->position.x, this->position.y, 50, RED);
+void FPlayer::Draw()
+{
+    std::cout << "Draw call for player" << std::endl;
+    DrawCircle(this->position.x, this->position.y, 50, RED);
 }
 
 void FPlayer::AddItem(FItem item)
 {
-	m_inventory.push_back(item);
+    m_inventory.push_back(item);
 }
 
 void FPlayer::TakeDamage(int damage)
 {
-	m_hp -= damage;
-	if (m_hp <= 0)
-	{
-		isDead = true;
-	}
+    m_hp -= damage;
+    if (m_hp <= 0)
+    {
+        isDead = true;
+    }
 }
 
 int FPlayer::GetHP()
 {
-	return m_hp;
+    return m_hp;
 }
 
 int FPlayer::Attack()
 {
-	if (m_activeGun >= 0)
-	{
-		// TODO: change damage when guns added
-		return 25;
-	}
-	return 0;
+    if (m_activeGun >= 0)
+    {
+        // TODO: change damage when guns added
+        return 25;
+    }
+    return 0;
 }

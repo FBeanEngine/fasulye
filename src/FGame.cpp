@@ -21,19 +21,21 @@ FGame::~FGame()
     CloseWindow();
 }
 
-
-void DrawGridChat(Camera2D camera, int gridSize) {
+void DrawGridChat(Camera2D camera, int gridSize)
+{
     // Calculate the starting point of the grid based on the camera offset
     int startX = (int)(camera.target.x - (GetScreenWidth() / 2.0f));
     int startY = (int)(camera.target.y - (GetScreenHeight() / 2.0f));
 
     // Draw vertical lines
-    for (int x = startX - (startX % gridSize); x < camera.target.x + (GetScreenWidth() / 2.0f); x += gridSize) {
+    for (int x = startX - (startX % gridSize); x < camera.target.x + (GetScreenWidth() / 2.0f); x += gridSize)
+    {
         DrawLine(x, -GetScreenHeight(), x, GetScreenHeight() * 2, LIGHTGRAY);
     }
 
     // Draw horizontal lines
-    for (int y = startY - (startY % gridSize); y < camera.target.y + (GetScreenHeight() / 2.0f); y += gridSize) {
+    for (int y = startY - (startY % gridSize); y < camera.target.y + (GetScreenHeight() / 2.0f); y += gridSize)
+    {
         DrawLine(-GetScreenWidth(), y, GetScreenWidth() * 2, y, LIGHTGRAY);
     }
 }
@@ -44,7 +46,7 @@ void FGame::Run()
     while (!WindowShouldClose())
     {
 
-        //DrawText("Fasulye", GetScreenWidth() / 2, GetScreenHeight() / 2, 20, WHITE);
+        // DrawText("Fasulye", GetScreenWidth() / 2, GetScreenHeight() / 2, 20, WHITE);
 
         std::unique_ptr<FScene> &activeScene = SceneMenager.GetActiveScene();
         // Physics update loop
@@ -55,8 +57,8 @@ void FGame::Run()
         ClearBackground(BLACK);
         BeginDrawing();
         BeginMode2D(activeScene->camera);
-        activeScene->Render();
         DrawGridChat(activeScene->camera, 50);
+        activeScene->Render();
         EndMode2D();
         EndDrawing();
     }

@@ -12,7 +12,7 @@ FScene::FScene(SceneType type)
         player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
     }
     camera.target = player->position;
-    camera.offset = (Vector2){static_cast<float>(GetScreenWidth() / 2),static_cast<float>(GetScreenHeight() / 2)};
+    camera.offset = {static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)};
     camera.rotation = 0;
     camera.zoom = 1;
 }
@@ -63,7 +63,7 @@ void FScene::Physics()
 }
 
 void FScene::Logic()
-{   
+{
     player->Update();
     camera.target = player->position;
     for (int i = 0; i < objects.size(); i++)
@@ -75,7 +75,7 @@ void FScene::Logic()
 void FScene::Render()
 {
     for (int i = 0; i < objects.size(); i++)
-    {   
+    {
         objects[i].Draw();
     }
 
