@@ -43,14 +43,15 @@ void FPlayer::Update(float dt)
         this->position.x += movementVector.x * 150 * dt;
         this->position.y += movementVector.y * 150 * dt;
         // animation.BindAnimation("left");
-        if (movementVector.x > 0)
-        {
-            animation.BindAnimation("right");
-        }
-        else
-        {
-            animation.BindAnimation("left");
-        }
+    }
+
+    if (movementVector.x > 0)
+    {
+        animation.BindAnimation("right");
+    }
+    else if (movementVector.x < 0)
+    {
+        animation.BindAnimation("left");
     }
     else
     {
