@@ -3,7 +3,7 @@
 #include "FItem.h"
 #include "FObject.h"
 #include "raylib.h"
-#include <vector>
+#include "FAnimation.h"
 
 class FPlayer : public FObject
 {
@@ -16,7 +16,9 @@ public:
     int Attack();
 
     void Update();
-    void Draw();
+    void Draw(float dt);
+
+    FAnimation animation;
 
 private:
     FInputManager m_inputManager;

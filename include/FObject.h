@@ -10,7 +10,7 @@ public:
     //~FObject();
 
     void Update();
-    void Draw();
+    void Draw(float dt);
 
     Vector2 position;
     Vector2 rotation;

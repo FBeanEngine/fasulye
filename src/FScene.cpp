@@ -72,12 +72,12 @@ void FScene::Logic()
     }
 }
 
-void FScene::Render()
+void FScene::Render(float dt)
 {
     for (int i = 0; i < objects.size(); i++)
     {
-        objects[i].Draw();
+        objects[i].Draw(dt);
     }
 
-    this->player->Draw();
+    this->player->Draw(dt);
 }

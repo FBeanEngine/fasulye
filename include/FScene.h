@@ -18,7 +18,7 @@ public:
 
     void Physics();
     void Logic();
-    void Render();
+    void Render(float dt);
 
 private:
     SceneType type;

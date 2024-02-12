@@ -14,7 +14,7 @@ void FObject::Update()
 	// TODO
 }
 
-void FObject::Draw()
+void FObject::Draw(float dt)
 {
 	// TODO
 }

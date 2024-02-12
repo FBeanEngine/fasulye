@@ -1,6 +1,8 @@
 #include "FPlayer.h"
 #include "raylib.h"
 #include <iostream>
+#include "FAnimation.h"
+#include "FAnimationClip.h"
 
 FPlayer::FPlayer(Vector2 position)
 {
@@ -9,9 +11,11 @@ FPlayer::FPlayer(Vector2 position)
     m_activeGun = -1;
     isDead = false;
 
-    texture = LoadTexture("resources/assets/idle.png");
-    this->position.y -= texture.height / 2 * 5;
-    this->position.x -= texture.width / 2 * 5;
+    FAnimationClip idleAnim = FAnimationClip("resources/assets/idle.png", 1, 96, 80, 1);
+    animation.AddAnimation("idle", idleAnim);
+
+    FAnimationClip rightAnim = FAnimationClip("resources/assets/run.png", 4, 96, 80, 5);
+    animation.AddAnimation("right", rightAnim);
 }
 
 // FPlayer::FPlayer(Vector2 position, Texture texture){
@@ -29,21 +33,25 @@ void FPlayer::Update()
     {
         this->position.x += movementVector.x * 2.5f;
         this->position.y += movementVector.y * 2.5f;
+        animation.BindAnimation("right");
     }
     else
     {
         this->position.x += movementVector.x * 5;
         this->position.y += movementVector.y * 5;
+        animation.BindAnimation("idle");
     }
 
     // std::cout << "Aim vector: " << aimVector.x << ", " << aimVector.y << std::endl;
 }
 
-void FPlayer::Draw()
+void FPlayer::Draw(float dt)
 {
     // std::cout << "Draw call for player" << std::endl;
     // DrawCircle(this->position.x, this->position.y, 50, RED);
-    DrawTextureEx(texture, this->position, 0.0f, 5.0f, WHITE);
+    // DrawTextureEx(texture, this->position, 0.0f, 5.0f, WHITE);
+
+    animation.Animate(this->position, dt);
 }
 
 void FPlayer::AddItem(FItem item)

@@ -45,7 +45,7 @@ void FGame::Run()
     std::cout << "FGame::Run()" << std::endl;
     while (!WindowShouldClose())
     {
-
+        float dt = GetFrameTime();
         // DrawText("Fasulye", GetScreenWidth() / 2, GetScreenHeight() / 2, 20, WHITE);
 
         std::unique_ptr<FScene> &activeScene = SceneMenager.GetActiveScene();
@@ -58,7 +58,7 @@ void FGame::Run()
         BeginDrawing();
         BeginMode2D(activeScene->camera);
         DrawGridChat(activeScene->camera, 50);
-        activeScene->Render();
+        activeScene->Render(dt);
         EndMode2D();
         EndDrawing();
     }
