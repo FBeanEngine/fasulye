@@ -75,7 +75,8 @@ void FScene::Logic(float dt)
 void FScene::Render(float dt)
 {
     Vector2 vec = GetScreenToWorld2D(GetMousePosition(), camera);
-    camera.target = LerpVector2(camera.target, {(player->position.x + vec.x) / 2, (player->position.y + vec.y) / 2}, 0.1f);
+    camera.target = LerpVector2(camera.target, {(player->position.x + vec.x) / 2, (player->position.y + vec.y) / 2}, 0.035f);
+    // camera.target = SmoothDamp(camera.target, {(player->position.x + vec.x) / 2, (player->position.y + vec.y) / 2}, new Vector2{0, 0}, 0.01f, 750, dt);
     // camera.target = {(player->position.x + vec.x) / 2, (player->position.y + vec.y) / 2};
     for (int i = 0; i < objects.size(); i++)
     {
