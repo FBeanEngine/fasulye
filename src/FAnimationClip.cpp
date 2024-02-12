@@ -1,6 +1,6 @@
 #include "FAnimationClip.h"
 
-FAnimationClip::FAnimationClip(const char *fileName, int frame, int width, int height, int speed)
+FAnimationClip::FAnimationClip(const char *fileName, int frame, int width, int height, int speed, bool inverse)
 {
 	this->speed = speed;
 	this->frame = frame;
@@ -12,7 +12,14 @@ FAnimationClip::FAnimationClip(const char *fileName, int frame, int width, int h
 
 	for (size_t i = 0; i < frame; i++)
 	{
-		clip.push_back({float(i * width), 0.0f, float(width), float(height)});
+		if (inverse)
+		{
+			clip.insert(clip.begin(), {float(i * width), 0.0f, float(width), float(height)});
+		}
+		else
+		{
+			clip.push_back({float(i * width), 0.0f, float(width), float(height)});
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 class FAnimationClip
 {
 public:
-    FAnimationClip(const char *fileName, int frame, int width, int height, int speed);
+    FAnimationClip(const char *fileName, int frame, int width, int height, int speed, bool inverse);
     ~FAnimationClip();
     void Play(Vector2 position, float dt);
 

@@ -11,11 +11,14 @@ FPlayer::FPlayer(Vector2 position)
     m_activeGun = -1;
     isDead = false;
 
-    FAnimationClip idleAnim = FAnimationClip("resources/assets/idle.png", 1, 96, 80, 1);
+    FAnimationClip idleAnim = FAnimationClip("resources/assets/idle.png", 1, 96, 80, 1, false);
     animation.AddAnimation("idle", idleAnim);
 
-    FAnimationClip rightAnim = FAnimationClip("resources/assets/run.png", 4, 96, 80, 5);
+    FAnimationClip rightAnim = FAnimationClip("resources/assets/run.png", 4, 96, 80, 5, false);
     animation.AddAnimation("right", rightAnim);
+
+    FAnimationClip leftAnim = FAnimationClip("resources/assets/run_left.png", 4, 96, 80, 5, true);
+    animation.AddAnimation("left", leftAnim);
 }
 
 // FPlayer::FPlayer(Vector2 position, Texture texture){
@@ -32,15 +35,22 @@ void FPlayer::Update(float dt)
     if (movementVector.x != 0 && movementVector.y != 0)
     {
         // Diagnol movement
-        this->position.x += movementVector.x * 50 * dt;
-        this->position.y += movementVector.y * 50 * dt;
-        animation.BindAnimation("right");
+        this->position.x += movementVector.x * 75 * dt;
+        this->position.y += movementVector.y * 75 * dt;
     }
     else if (movementVector.x != 0 || movementVector.y != 0)
     {
-        this->position.x += movementVector.x * 100 * dt;
-        this->position.y += movementVector.y * 100 * dt;
-        animation.BindAnimation("right");
+        this->position.x += movementVector.x * 150 * dt;
+        this->position.y += movementVector.y * 150 * dt;
+        // animation.BindAnimation("left");
+        if (movementVector.x > 0)
+        {
+            animation.BindAnimation("right");
+        }
+        else
+        {
+            animation.BindAnimation("left");
+        }
     }
     else
     {
