@@ -9,7 +9,7 @@ public:
     FObject();
     //~FObject();
 
-    void Update();
+    void Update(float dt);
     void Draw(float dt);
 
     Vector2 position;

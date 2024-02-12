@@ -22,23 +22,28 @@ FPlayer::FPlayer(Vector2 position)
 // TODO
 // }
 
-void FPlayer::Update()
+void FPlayer::Update(float dt)
 {
     // std::cout << "Update call for player" << std::endl;
     Vector2 movementVector = m_inputManager.GetMovementVector();
     Vector2 aimVector = m_inputManager.GetAimVector(this->position);
     // PerformedAction action = FInputManager::GetPerfomedAction(
 
-    if (movementVector.x != 0 || movementVector.y != 0)
+    if (movementVector.x != 0 && movementVector.y != 0)
     {
-        this->position.x += movementVector.x * 2.5f;
-        this->position.y += movementVector.y * 2.5f;
+        // Diagnol movement
+        this->position.x += movementVector.x * 50 * dt;
+        this->position.y += movementVector.y * 50 * dt;
+        animation.BindAnimation("right");
+    }
+    else if (movementVector.x != 0 || movementVector.y != 0)
+    {
+        this->position.x += movementVector.x * 100 * dt;
+        this->position.y += movementVector.y * 100 * dt;
         animation.BindAnimation("right");
     }
     else
     {
-        this->position.x += movementVector.x * 5;
-        this->position.y += movementVector.y * 5;
         animation.BindAnimation("idle");
     }
 

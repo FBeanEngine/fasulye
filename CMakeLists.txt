@@ -18,7 +18,9 @@ set(PROJECT_SOURCES
         ${PROJECT_SOURCE_DIR}/FSceneManager.cpp
         ${PROJECT_SOURCE_DIR}/FInputManager.cpp
         ${PROJECT_SOURCE_DIR}/FAnimation.cpp
-        ${PROJECT_SOURCE_DIR}/FAnimationClip.cpp)
+        ${PROJECT_SOURCE_DIR}/FAnimationClip.cpp
+        ${PROJECT_SOURCE_DIR}/utils.cpp)
+
 
 # Dependencies
 include(FetchContent)

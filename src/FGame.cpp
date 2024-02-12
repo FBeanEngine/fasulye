@@ -7,7 +7,7 @@
 FGame::FGame()
 {
     InitWindow(1280, 720, "FSun");
-    SetTargetFPS(60);
+    SetTargetFPS(120);
 
     SceneMenager = FSceneManager();
     std::unique_ptr<FScene> scene = std::unique_ptr<FScene>(new FScene(SceneType::SpaceStation));
@@ -52,14 +52,19 @@ void FGame::Run()
         // Physics update loop
         activeScene->Physics();
         // Game logic update loop
-        activeScene->Logic();
+        activeScene->Logic(dt);
         // Drawing loop
         ClearBackground(BLACK);
         BeginDrawing();
         BeginMode2D(activeScene->camera);
+
         DrawGridChat(activeScene->camera, 50);
         activeScene->Render(dt);
+
         EndMode2D();
+
+        DrawFPS(GetScreenWidth() / 6, GetScreenHeight() / 4);
+
         EndDrawing();
     }
 }

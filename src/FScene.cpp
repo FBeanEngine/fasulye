@@ -2,6 +2,7 @@
 #include "FObject.h"
 #include "FPlayer.h"
 #include "raylib.h"
+#include "utils.h"
 #include <iostream>
 
 FScene::FScene(SceneType type)
@@ -62,18 +63,20 @@ void FScene::Physics()
     // ToDo: Collision check
 }
 
-void FScene::Logic()
+void FScene::Logic(float dt)
 {
-    player->Update();
-    camera.target = player->position;
+    player->Update(dt);
     for (int i = 0; i < objects.size(); i++)
     {
-        objects[i].Update();
+        objects[i].Update(dt);
     }
 }
 
 void FScene::Render(float dt)
 {
+    Vector2 vec = GetScreenToWorld2D(GetMousePosition(), camera);
+    camera.target = LerpVector2(camera.target, {(player->position.x + vec.x) / 2, (player->position.y + vec.y) / 2}, 0.1f);
+    // camera.target = {(player->position.x + vec.x) / 2, (player->position.y + vec.y) / 2};
     for (int i = 0; i < objects.size(); i++)
     {
         objects[i].Draw(dt);

@@ -17,7 +17,7 @@ public:
     Camera2D camera;
 
     void Physics();
-    void Logic();
+    void Logic(float dt);
     void Render(float dt);
 
 private:

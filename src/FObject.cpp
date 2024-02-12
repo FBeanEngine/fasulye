@@ -9,7 +9,7 @@ FObject::FObject()
 // TODO
 // }
 
-void FObject::Update()
+void FObject::Update(float dt)
 {
 	// TODO
 }

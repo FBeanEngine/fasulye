@@ -15,7 +15,7 @@ public:
     int GetHP();
     int Attack();
 
-    void Update();
+    void Update(float dt);
     void Draw(float dt);
 
     FAnimation animation;
