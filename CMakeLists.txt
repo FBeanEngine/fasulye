@@ -15,7 +15,9 @@ set(PROJECT_SOURCES
         ${PROJECT_SOURCE_DIR}/FObject.cpp
         ${PROJECT_SOURCE_DIR}/FPlayer.cpp
         ${PROJECT_SOURCE_DIR}/FScene.cpp
-        ${PROJECT_SOURCE_DIR}/FSceneManager.cpp)
+        ${PROJECT_SOURCE_DIR}/FSceneManager.cpp
+        ${PROJECT_SOURCE_DIR}/FInputManager.cpp
+        )
 
 # Dependencies
 include(FetchContent)

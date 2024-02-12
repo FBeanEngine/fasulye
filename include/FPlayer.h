@@ -1,4 +1,5 @@
 #pragma once
+#include "FInputManager.h"
 #include "FItem.h"
 #include "FObject.h"
 #include "raylib.h"
@@ -18,6 +19,7 @@ public:
     void Draw();
 
 private:
+    FInputManager m_inputManager;
     std::vector<FItem> m_inventory;
     int m_hp;
     std::vector<FItem> m_activeGuns;
