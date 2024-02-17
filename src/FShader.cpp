@@ -38,6 +38,11 @@ int FShader::FLoadShader(const char *shaderName, ShaderType shaderType)
 	return m_shaderCount;
 }
 
+void FShader::FSetValue(int shaderId, int uniformName, const void *value, int uniformType)
+{
+	SetShaderValue(m_shaders[shaderId], uniformName, value, uniformType);
+}
+
 void FShader::FUnloadShader(int shaderId)
 {
 	UnloadShader(m_shaders[shaderId]);
