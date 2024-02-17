@@ -1,8 +1,10 @@
 #include "FPlayer.h"
 #include "raylib.h"
 #include <iostream>
+#include "FObject.h"
 #include "FAnimation.h"
 #include "FAnimationClip.h"
+#include "FShader.h"
 
 FPlayer::FPlayer(Vector2 position)
 {
@@ -19,6 +21,14 @@ FPlayer::FPlayer(Vector2 position)
 
     FAnimationClip leftAnim = FAnimationClip("resources/assets/run_left.png", 4, 96, 80, 5, true);
     animation.AddAnimation("left", leftAnim);
+
+    // shader.FLoadShader("grayscale.fs", ShaderType::Fragment);
+    // TraceLog(LOG_INFO, "Shader count: %d", shader.m_shaderCount);
+}
+
+FPlayer::~FPlayer()
+{
+    std::cout << "FPlayer destructor: " << std::endl;
 }
 
 // FPlayer::FPlayer(Vector2 position, Texture texture){
@@ -66,8 +76,17 @@ void FPlayer::Draw(float dt)
     // std::cout << "Draw call for player" << std::endl;
     // DrawCircle(this->position.x, this->position.y, 50, RED);
     // DrawTextureEx(texture, this->position, 0.0f, 5.0f, WHITE);
-
-    animation.Animate(this->position, dt);
+    // TraceLog(LOG_INFO, "Shader count: %d", shader.m_shaderCount);
+    if (shader.m_shaderCount > 0)
+    {
+        BeginShaderMode(shader.m_shaders[0]);
+        animation.Animate(this->position, dt);
+        EndShaderMode();
+    }
+    else
+    {
+        animation.Animate(this->position, dt);
+    }
 }
 
 void FPlayer::AddItem(FItem item)

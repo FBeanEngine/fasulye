@@ -4,11 +4,13 @@
 #include "FObject.h"
 #include "raylib.h"
 #include "FAnimation.h"
+#include "FShader.h"
 
 class FPlayer : public FObject
 {
 public:
     FPlayer(Vector2 position);
+    ~FPlayer();
     // FPlayer(Vector2 position, Texture texture);
     void AddItem(FItem item);
     void TakeDamage(int damage);
@@ -27,4 +29,5 @@ private:
     std::vector<FItem> m_activeGuns;
     int m_activeGun;
     bool isDead;
+    FShader shader;
 };
