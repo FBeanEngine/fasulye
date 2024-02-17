@@ -12,3 +12,9 @@ enum PerformedAction
     LeftHandUse,
     RightHandUse
 };
+
+enum ShaderType
+{
+    Vertex,
+    Fragment
+};
