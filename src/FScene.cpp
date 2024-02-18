@@ -82,6 +82,6 @@ void FScene::Render(float dt)
     {
         objects[i].Draw(dt);
     }
-
+    this->player->SetMousePosition(vec);
     this->player->Draw(dt);
 }
