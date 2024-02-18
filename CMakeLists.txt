@@ -20,6 +20,8 @@ set(PROJECT_SOURCES
         ${PROJECT_SOURCE_DIR}/FAnimation.cpp
         ${PROJECT_SOURCE_DIR}/FAnimationClip.cpp
         ${PROJECT_SOURCE_DIR}/FShader.cpp
+        ${PROJECT_SOURCE_DIR}/FGun.cpp
+        ${PROJECT_SOURCE_DIR}/FAmmo.cpp
         ${PROJECT_SOURCE_DIR}/utils.cpp)
 
 
