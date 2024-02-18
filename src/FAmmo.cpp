@@ -1,5 +1,6 @@
 #include "FAmmo.h"
 #include "utils.h"
+#include <cmath>
 
 FAmmo::FAmmo(Vector2 position, Vector2 target, int damage, int range, int bulletSpeed, Texture2D texture)
 {
@@ -10,6 +11,10 @@ FAmmo::FAmmo(Vector2 position, Vector2 target, int damage, int range, int bullet
 	m_bulletSpeed = bulletSpeed;
 	m_texture = texture;
 	isDestroyed = false;
+
+	Vector2 direction = {m_target.x - m_position.x, m_target.y - m_position.y};
+	float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+	m_target = {direction.x / length, direction.y / length};
 }
 
 FAmmo::~FAmmo()
@@ -19,9 +24,10 @@ FAmmo::~FAmmo()
 
 void FAmmo::Update(float dt)
 {
-	m_position = LerpVector2(m_position, m_target, m_bulletSpeed * dt);
-	Vector2 distance = Vector2Distance(m_position, m_target);
-	if (distance.x < 10 && distance.y < 10)
+	m_position.x += m_target.x * m_bulletSpeed * dt * 10;
+	m_position.y += m_target.y * m_bulletSpeed * dt * 10;
+	m_range -= m_bulletSpeed * dt;
+	if (m_range <= 0)
 	{
 		isDestroyed = true;
 		UnloadTexture(m_texture);

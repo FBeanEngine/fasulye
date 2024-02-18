@@ -9,7 +9,7 @@ FGun::FGun()
 
 void FGun::Shoot(Vector2 target)
 {
-	std::unique_ptr<FAmmo> ammo(new FAmmo(m_position, target, 1, 200, 1, LoadTexture("resources/assets/ammo.png")));
+	std::unique_ptr<FAmmo> ammo(new FAmmo(m_position, target, 1, 75, 100, LoadTexture("resources/assets/ammo.png")));
 	m_ammos.push_back(std::move(ammo));
 }
 
