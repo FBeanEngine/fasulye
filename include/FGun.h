@@ -1,8 +1,9 @@
 #pragma once
 #include "raylib.h"
 #include "FObject.h"
-#include <vector>
 #include "FAmmo.h"
+#include <vector>
+#include <memory>
 
 class FGun : public FObject
 {
@@ -21,5 +22,5 @@ private:
     float m_rotation;
     Texture2D m_texture;
     int m_fireRate;
-    std::vector<FAmmo> m_ammos;
+    std::vector<std::unique_ptr<FAmmo>> m_ammos;
 };

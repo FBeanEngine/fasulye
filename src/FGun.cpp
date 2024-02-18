@@ -9,7 +9,8 @@ FGun::FGun()
 
 void FGun::Shoot(Vector2 target)
 {
-	m_ammos.push_back(FAmmo(m_position, target, 1, 200, 1, LoadTexture("resources/assets/ammo.png")));
+	std::unique_ptr<FAmmo> ammo(new FAmmo(m_position, target, 1, 200, 1, LoadTexture("resources/assets/ammo.png")));
+	m_ammos.push_back(std::move(ammo));
 }
 
 void FGun::Update(Vector2 position, float dt)
@@ -17,8 +18,8 @@ void FGun::Update(Vector2 position, float dt)
 	m_position = {position.x + 60, position.y + 36};
 	for (size_t i = 0; i < m_ammos.size(); i++)
 	{
-		m_ammos[i].Update(dt);
-		if (m_ammos[i].isDestroyed)
+		m_ammos[i]->Update(dt);
+		if (m_ammos[i]->isDestroyed)
 		{
 			m_ammos.erase(m_ammos.begin() + i);
 		}
@@ -30,7 +31,7 @@ void FGun::Draw(float dt)
 	DrawTextureEx(m_texture, m_position, m_rotation, 1.5, WHITE);
 	for (size_t i = 0; i < m_ammos.size(); i++)
 	{
-		m_ammos[i].Draw();
+		m_ammos[i]->Draw();
 	}
 }
 

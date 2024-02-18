@@ -12,6 +12,11 @@ FAmmo::FAmmo(Vector2 position, Vector2 target, int damage, int range, int bullet
 	isDestroyed = false;
 }
 
+FAmmo::~FAmmo()
+{
+	TraceLog(LOG_INFO, "FAmmo destroyed");
+}
+
 void FAmmo::Update(float dt)
 {
 	m_position = LerpVector2(m_position, m_target, m_bulletSpeed * dt);
@@ -19,6 +24,7 @@ void FAmmo::Update(float dt)
 	if (distance.x < 10 && distance.y < 10)
 	{
 		isDestroyed = true;
+		UnloadTexture(m_texture);
 	}
 }
 
