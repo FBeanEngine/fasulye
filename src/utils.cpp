@@ -1,6 +1,11 @@
 #include "utils.h"
 #include <cmath>
 
+Vector2 Vector2Distance(Vector2 a, Vector2 b)
+{
+    return Vector2{std::abs(b.x - a.x), std::abs(b.y - a.y)};
+}
+
 Vector2 LerpVector2(Vector2 a, Vector2 b, float t)
 {
     return Vector2{a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t};
