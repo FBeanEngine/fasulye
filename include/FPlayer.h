@@ -5,6 +5,7 @@
 #include "raylib.h"
 #include "FAnimation.h"
 #include "FShader.h"
+#include "FGun.h"
 
 class FPlayer : public FObject
 {
@@ -21,6 +22,7 @@ public:
     void Draw(float dt);
 
     FAnimation animation;
+    void SetMousePosition(Vector2 mousePosition);
 
 private:
     FInputManager m_inputManager;
@@ -30,4 +32,6 @@ private:
     int m_activeGun;
     bool isDead;
     FShader shader;
+    FGun m_gun;
+    Vector2 m_mousePosition;
 };

@@ -22,12 +22,14 @@ FPlayer::FPlayer(Vector2 position)
     FAnimationClip leftAnim = FAnimationClip("resources/assets/run_left.png", 4, 96, 80, 5, true);
     animation.AddAnimation("left", leftAnim);
 
-    shader.FLoadShader("damage.fs", ShaderType::Fragment);
+    // shader.FLoadShader("damage.fs", ShaderType::Fragment);
     // TraceLog(LOG_INFO, "Shader count: %d", shader.m_shaderCount);
 
     // shader.FLoadShader("wave.fs", ShaderType::Fragment);
-    shader.m_shaderFloatValues.push_back(0.0f);
-    TraceLog(LOG_INFO, "Shader count: %d", shader.m_shaderCount);
+    // shader.m_shaderFloatValues.push_back(0.0f);
+    // TraceLog(LOG_INFO, "Shader count: %d", shader.m_shaderCount);
+
+    // m_gun.SetTexture(LoadTexture("resources/assets/gun.png"));
 }
 
 FPlayer::~FPlayer()
@@ -44,7 +46,7 @@ void FPlayer::Update(float dt)
     // std::cout << "Update call for player" << std::endl;
     Vector2 movementVector = m_inputManager.GetMovementVector();
     Vector2 aimVector = m_inputManager.GetAimVector(this->position);
-    // PerformedAction action = FInputManager::GetPerfomedAction(
+    PerformedAction action = m_inputManager.GetPerfomedAction();
 
     if (movementVector.x != 0 && movementVector.y != 0)
     {
@@ -71,7 +73,12 @@ void FPlayer::Update(float dt)
     {
         animation.BindAnimation("idle");
     }
+    m_gun.Update(this->position, dt);
 
+    if (action == PerformedAction::LeftHandUse)
+    {
+        m_gun.Shoot(m_mousePosition);
+    }
     // std::cout << "Aim vector: " << aimVector.x << ", " << aimVector.y << std::endl;
 }
 
@@ -83,9 +90,9 @@ void FPlayer::Draw(float dt)
     // TraceLog(LOG_INFO, "Shader count: %d", shader.m_shaderCount);
     if (shader.m_shaderCount > 0)
     {
-        shader.m_shaderFloatValues[0] += GetFrameTime();
+        // shader.m_shaderFloatValues[0] += GetFrameTime();
         BeginShaderMode(shader.m_shaders[0]);
-        shader.FSetValue(0, GetShaderLocation(shader.m_shaders[0], "seconds"), &shader.m_shaderFloatValues[0], SHADER_UNIFORM_FLOAT);
+        // shader.FSetValue(0, GetShaderLocation(shader.m_shadKers[0], "seconds"), &shader.m_shaderFloatValues[0], SHADER_UNIFORM_FLOAT);
         animation.Animate(this->position, dt);
         EndShaderMode();
     }
@@ -93,6 +100,7 @@ void FPlayer::Draw(float dt)
     {
         animation.Animate(this->position, dt);
     }
+    m_gun.Draw(dt);
 }
 
 void FPlayer::AddItem(FItem item)
@@ -122,4 +130,9 @@ int FPlayer::Attack()
         return 25;
     }
     return 0;
+}
+
+void FPlayer::SetMousePosition(Vector2 mousePosition)
+{
+    m_mousePosition = mousePosition;
 }
