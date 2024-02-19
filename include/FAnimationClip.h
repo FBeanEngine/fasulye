@@ -6,7 +6,7 @@
 class FAnimationClip
 {
 public:
-    FAnimationClip(const char *fileName, int frame, int width, int height, int speed, bool inverse);
+    FAnimationClip(const char *fileName, int frame, int width, int height, int speed, bool inverse, bool wihoutBlock);
     ~FAnimationClip();
     void Play(Vector2 position, float dt);
 
@@ -17,5 +17,7 @@ public:
     float counter;
     int width;
     int height;
+    bool withoutBlock;
+    bool isFinished;
     Texture2D tileset;
 };

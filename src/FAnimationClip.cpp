@@ -1,12 +1,14 @@
 #include "FAnimationClip.h"
 
-FAnimationClip::FAnimationClip(const char *fileName, int frame, int width, int height, int speed, bool inverse)
+FAnimationClip::FAnimationClip(const char *fileName, int frame, int width, int height, int speed, bool inverse, bool wihoutBlock)
 {
 	this->speed = speed;
 	this->frame = frame;
 	this->counter = 0.f;
 	this->height = height;
 	this->width = width;
+	this->withoutBlock = wihoutBlock;
+	this->isFinished = true;
 
 	this->tileset = LoadTexture(fileName);
 
@@ -32,8 +34,16 @@ void FAnimationClip::Play(Vector2 position, float dt)
 {
 	// DrawTexturePro(anim.m_tileset, anim.m_clip[anim.counter], {this->position.x, this->position.y, 96.f, 80.f}, {0.f, 0.f}, 0, WHITE);
 	counter += speed * dt;
+	if (!withoutBlock)
+	{
+		isFinished = true;
+	}
 	if (counter >= frame)
 	{
+		if (withoutBlock)
+		{
+			isFinished = true;
+		}
 		counter = 0.f;
 	}
 	DrawTexturePro(tileset, clip[int(counter)], {position.x, position.y, float(width), float(height)}, {0.f, 0.f}, 0, WHITE);

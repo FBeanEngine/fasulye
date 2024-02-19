@@ -10,6 +10,7 @@ public:
     FAnimation();
     ~FAnimation();
     void AddAnimation(std::string animationName, FAnimationClip clip);
+    FAnimationClip *GetAnimation(std::string animationName);
 
     void Animate(Vector2 position, float dt);
     void BindAnimation(std::string animationName);

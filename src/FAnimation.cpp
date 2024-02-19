@@ -17,6 +17,18 @@ void FAnimation::AddAnimation(std::string animationName, FAnimationClip clip)
 	m_animations.push_back(clip);
 }
 
+FAnimationClip *FAnimation::GetAnimation(std::string animationName)
+{
+	for (size_t i = 0; i < m_animationsNames.size(); i++)
+	{
+		if (m_animationsNames[i] == animationName)
+		{
+			return &m_animations[i];
+		}
+	}
+	return nullptr;
+}
+
 void FAnimation::Animate(Vector2 position, float dt)
 {
 	if (m_currentAnimation == "")
@@ -38,11 +50,19 @@ void FAnimation::Animate(Vector2 position, float dt)
 		std::cout << "Animation Not Found: " << m_currentAnimation << std::endl;
 		return;
 	}
-
+	m_animations[animationID].isFinished = false;
 	m_animations[animationID].Play(position, dt);
 }
 
 void FAnimation::BindAnimation(std::string animationName)
 {
+	FAnimationClip *clip = GetAnimation(m_currentAnimation);
+	// std::cout << "BindAnimation: " << animationName << std::endl;
+	if (clip && clip->isFinished == false)
+	{
+		std::cout << "Animation is not finished: " << m_currentAnimation << std::endl;
+		return;
+	}
+	// std::cout << "EndBindAnimation: " << animationName << std::endl;
 	m_currentAnimation = animationName;
 }

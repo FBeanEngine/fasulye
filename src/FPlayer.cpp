@@ -13,14 +13,17 @@ FPlayer::FPlayer(Vector2 position)
     m_activeGun = -1;
     isDead = false;
 
-    FAnimationClip idleAnim = FAnimationClip("resources/assets/idle.png", 1, 96, 80, 1, false);
+    FAnimationClip idleAnim = FAnimationClip("resources/assets/idle.png", 1, 96, 80, 1, false, false);
     animation.AddAnimation("idle", idleAnim);
 
-    FAnimationClip rightAnim = FAnimationClip("resources/assets/run.png", 4, 96, 80, 5, false);
+    FAnimationClip rightAnim = FAnimationClip("resources/assets/run.png", 4, 96, 80, 5, false, false);
     animation.AddAnimation("right", rightAnim);
 
-    FAnimationClip leftAnim = FAnimationClip("resources/assets/run_left.png", 4, 96, 80, 5, true);
+    FAnimationClip leftAnim = FAnimationClip("resources/assets/run_left.png", 4, 96, 80, 5, true, false);
     animation.AddAnimation("left", leftAnim);
+
+    FAnimationClip shootAnim = FAnimationClip("resources/assets/shoot.png", 4, 96, 80, 5, false, true);
+    animation.AddAnimation("shoot", shootAnim);
 
     // shader.FLoadShader("damage.fs", ShaderType::Fragment);
     // TraceLog(LOG_INFO, "Shader count: %d", shader.m_shaderCount);
@@ -77,6 +80,7 @@ void FPlayer::Update(float dt)
 
     if (action == PerformedAction::LeftHandUse)
     {
+        animation.BindAnimation("shoot");
         m_gun.Shoot(m_mousePosition);
     }
     // std::cout << "Aim vector: " << aimVector.x << ", " << aimVector.y << std::endl;
