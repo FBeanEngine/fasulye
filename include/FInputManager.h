@@ -8,7 +8,7 @@ class FInputManager
 public:
     FInputManager();
 
-    PerformedAction GetPerfomedAction();
-    Vector2 GetMovementVector();
-    Vector2 GetAimVector(Vector2 origin);
+    static PerformedAction GetPerfomedAction();
+    static Vector2 GetMovementVector();
+    static Vector2 GetAimVector(Vector2 origin);
 };
