@@ -2,7 +2,6 @@
 
 FObject::FObject()
 {
-	// TODO
 }
 
 //~ FObject::FObject(){
@@ -17,4 +16,9 @@ void FObject::Update(float dt)
 void FObject::Draw(float dt)
 {
 	// TODO
+}
+
+void FObject::SetMousePosition(Vector2 mousePosition)
+{
+	m_mousePosition = mousePosition;
 }

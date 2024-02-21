@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include "raylib.h"
 #include "FStruct.h"
 
@@ -9,8 +10,9 @@ public:
     FObject();
     //~FObject();
 
-    void Update(float dt);
-    void Draw(float dt);
+    virtual void Update(float dt);
+    virtual void Draw(float dt);
+    void SetMousePosition(Vector2 mousePosition);
 
     Vector2 position;
     Vector2 rotation;
@@ -19,5 +21,6 @@ public:
     std::vector<FObject> collidedObjects;
 
 protected:
+    Vector2 m_mousePosition;
     Texture texture;
 };
