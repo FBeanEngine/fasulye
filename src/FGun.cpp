@@ -1,6 +1,7 @@
 #include "FGun.h"
 #include "FSceneManager.h"
 #include "FInputManager.h"
+#include <iostream>
 
 FGun::FGun()
 {
@@ -12,25 +13,18 @@ FGun::FGun()
 
 FGun::~FGun()
 {
-	TraceLog(LOG_INFO, "FGun::~FGun()");
+	std::cout << "FGun::~FGun()" << std::endl;
 }
 
 void FGun::Shoot(Vector2 target)
 {
+	// TraceLog(LOG_INFO, "FGun::Shoot()");
 	std::unique_ptr<FAmmo> ammo(new FAmmo(m_position, target, 1, 75, 100, LoadTexture("resources/assets/ammo.png")));
 	FSceneManager::AddObjectToActiveScene(std::move(ammo));
 }
 
 void FGun::Update(float dt)
 {
-	// for (size_t i = 0; i < m_ammos.size(); i++)
-	// {
-	// 	m_ammos[i]->Update(dt);
-	// 	if (m_ammos[i]->isDestroyed)
-	// 	{
-	// 		m_ammos.erase(m_ammos.begin() + i);
-	// 	}
-	// }
 	m_position = m_owner->position;
 	Vector2 movementVector = FInputManager::GetMovementVector();
 	Vector2 aimVector = FInputManager::GetAimVector(m_position);
@@ -45,10 +39,6 @@ void FGun::Update(float dt)
 void FGun::Draw(float dt)
 {
 	// DrawTextureEx(m_texture, m_position, m_rotation, 5, WHITE);
-	// for (size_t i = 0; i < m_ammos.size(); i++)
-	// {
-	// 	m_ammos[i]->Draw();
-	// }
 }
 
 void FGun::SetPosition(Vector2 position)

@@ -2,11 +2,13 @@
 
 FObject::FObject()
 {
+	isDestroyed = false;
 }
 
-//~ FObject::FObject(){
-// TODO
-// }
+FObject::~FObject()
+{
+	// TODO
+}
 
 void FObject::Update(float dt)
 {

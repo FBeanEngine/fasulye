@@ -8,7 +8,7 @@ class FObject
 {
 public:
     FObject();
-    //~FObject();
+    ~FObject();
 
     virtual void Update(float dt);
     virtual void Draw(float dt);
@@ -18,6 +18,7 @@ public:
     Vector2 rotation;
     FBoundingBox boundingBox;
     bool enableBoundingBox;
+    bool isDestroyed;
     std::vector<FObject> collidedObjects;
 
 protected:

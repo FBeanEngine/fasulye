@@ -7,7 +7,6 @@ public:
     FTestWorld();
     ~FTestWorld();
     void Init();
-    void Render(float dt);
 
 private:
     bool m_isActive;

@@ -16,18 +16,3 @@ FTestWorld::~FTestWorld()
 {
 	// TODO
 }
-
-void FTestWorld::Render(float dt)
-{
-	Vector2 vec = GetScreenToWorld2D(GetMousePosition(), camera.GetCamera());
-	camera.SetTarget({player->position.x + 48, player->position.y + 40});
-	// std::cout << "FScene::Render()" << objects.size() << std::endl;
-
-	for (int i = 0; i < objects.size(); i++)
-	{
-		objects[i]->SetMousePosition(vec);
-		objects[i]->Draw(dt);
-	}
-	this->player->SetMousePosition(vec);
-	this->player->Draw(dt);
-}

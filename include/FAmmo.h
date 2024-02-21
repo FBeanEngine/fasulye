@@ -11,8 +11,6 @@ public:
     void Update(float dt) override;
     void Draw(float dt) override;
 
-    bool isDestroyed;
-
 private:
     Vector2 m_position;
     Vector2 m_target;
