@@ -50,3 +50,8 @@ int FSceneManager::LoadScene(int index)
     m_active_scene = index;
     return index;
 }
+
+void FSceneManager::AddObjectToActiveScene(std::unique_ptr<FObject> object)
+{
+    m_sceneList[m_active_scene]->AddObject(std::move(object));
+}

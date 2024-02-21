@@ -14,6 +14,7 @@ public:
     static std::unique_ptr<FScene> &GetActiveScene();
     static int SetActiveScene(int index);
     static int LoadScene(int index);
+    static void AddObjectToActiveScene(std::unique_ptr<FObject> object);
 
 private:
     static int m_loadadSceneCount;
