@@ -30,11 +30,11 @@ void FAmmo::Update(float dt)
 	if (m_range <= 0)
 	{
 		isDestroyed = true;
-		UnloadTexture(m_texture);
+		// UnloadTexture(m_texture);
 	}
 }
 
-void FAmmo::Draw()
+void FAmmo::Draw(float dt)
 {
 	DrawTextureEx(m_texture, m_position, 0, 3, WHITE);
 }
