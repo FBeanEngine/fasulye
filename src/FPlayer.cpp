@@ -5,6 +5,7 @@
 #include "FAnimation.h"
 #include "FAnimationClip.h"
 #include "FShader.h"
+#include "FSceneManager.h"
 
 FPlayer::FPlayer(Vector2 position)
 {
@@ -24,6 +25,11 @@ FPlayer::FPlayer(Vector2 position)
 
     FAnimationClip shootAnim = FAnimationClip("resources/assets/shoot.png", 4, 96, 80, 5, false, true);
     animation.AddAnimation("shoot", shootAnim);
+
+    std::unique_ptr<FGun> gun(new FGun());
+    gun->SetOwner(this);
+    gun->SetTexture(LoadTexture("resources/assets/gun.png"));
+    FSceneManager::AddObjectToActiveScene(std::move(gun));
 
     // shader.FLoadShader("damage.fs", ShaderType::Fragment);
     // TraceLog(LOG_INFO, "Shader count: %d", shader.m_shaderCount);
@@ -76,13 +82,8 @@ void FPlayer::Update(float dt)
     {
         animation.BindAnimation("idle");
     }
-    m_gun.Update(this->position, dt);
+    // m_gun.Update(dt);
 
-    if (action == PerformedAction::LeftHandUse)
-    {
-        animation.BindAnimation("shoot");
-        m_gun.Shoot(m_mousePosition);
-    }
     // std::cout << "Aim vector: " << aimVector.x << ", " << aimVector.y << std::endl;
 }
 
@@ -104,7 +105,7 @@ void FPlayer::Draw(float dt)
     {
         animation.Animate(this->position, dt);
     }
-    m_gun.Draw(dt);
+    // m_gun.Draw(dt);
 }
 
 void FPlayer::AddItem(FItem item)

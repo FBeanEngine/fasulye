@@ -6,6 +6,7 @@
 #include "FAnimation.h"
 #include "FShader.h"
 #include "FGun.h"
+#include <memory>
 
 class FPlayer : public FObject
 {
@@ -32,6 +33,5 @@ private:
     int m_activeGun;
     bool isDead;
     FShader shader;
-    FGun m_gun;
     Vector2 m_mousePosition;
 };
