@@ -41,6 +41,7 @@ std::unique_ptr<FScene> &FSceneManager::GetActiveScene()
 int FSceneManager::SetActiveScene(int index)
 {
     m_active_scene = index;
+    m_sceneList[index]->Init();
     return index;
 }
 

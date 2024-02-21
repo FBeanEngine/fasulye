@@ -10,18 +10,19 @@
 class FScene
 {
 public:
-    FScene(SceneType type);
+    FScene();
     ~FScene();
+    virtual void Init();
     int AddObject(FObject object);
     int RemoveObject(int index);
     FObject GetObject(int index);
     FCamera camera;
 
-    void Physics();
-    void Logic(float dt);
-    void Render(float dt);
+    virtual void Physics();
+    virtual void Logic(float dt);
+    virtual void Render(float dt);
 
-private:
+protected:
     SceneType type;
     std::unique_ptr<FPlayer> player;
     std::vector<FObject> objects;

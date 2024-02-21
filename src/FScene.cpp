@@ -5,13 +5,9 @@
 #include "utils.h"
 #include <iostream>
 
-FScene::FScene(SceneType type)
+FScene::FScene()
 {
-    this->type = type;
-    if (type == SceneType::SpaceStation)
-    {
-        player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
-    }
+    std::cout << "FScene constructor: " << std::endl;
     camera.AddEffect(CameraEffect::None);
     // camera.AddEffect(CameraEffect::Shake);
 }
@@ -19,6 +15,11 @@ FScene::FScene(SceneType type)
 FScene::~FScene()
 {
     std::cout << "FScene destructor: " << std::endl;
+}
+
+void FScene::Init()
+{
+    // init scene that effect fSceneManager
 }
 
 int FScene::AddObject(FObject object)

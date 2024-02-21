@@ -3,6 +3,7 @@
 #include "FGame.h"
 #include "FSceneManager.h"
 #include <iostream>
+#include "FTestWorld.h"
 
 FGame::FGame()
 {
@@ -10,7 +11,7 @@ FGame::FGame()
     SetTargetFPS(120);
 
     // SceneMenager = FSceneManager();
-    std::unique_ptr<FScene> scene = std::unique_ptr<FScene>(new FScene(SceneType::SpaceStation));
+    std::unique_ptr<FScene> scene = std::unique_ptr<FScene>(new FTestWorld());
     FSceneManager::AddScene(std::move(scene));
 
     FSceneManager::SetActiveScene(0);
@@ -47,7 +48,6 @@ void FGame::Run()
     {
         float dt = GetFrameTime();
         // DrawText("Fasulye", GetScreenWidth() / 2, GetScreenHeight() / 2, 20, WHITE);
-
         std::unique_ptr<FScene> &activeScene = FSceneManager::GetActiveScene();
         // Physics update loop
         activeScene->Physics();
