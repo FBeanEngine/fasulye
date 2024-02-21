@@ -18,3 +18,9 @@ enum ShaderType
     Vertex,
     Fragment
 };
+
+enum CameraEffect {
+    None,
+    Shake,
+    SmoothFollow
+};

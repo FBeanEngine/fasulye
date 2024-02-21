@@ -56,9 +56,9 @@ void FGame::Run()
         // Drawing loop
         ClearBackground(BLACK);
         BeginDrawing();
-        BeginMode2D(activeScene->camera);
+        BeginMode2D(activeScene->camera.GetCamera());
 
-        DrawGridChat(activeScene->camera, 50);
+        DrawGridChat(activeScene->camera.GetCamera(), 50);
         activeScene->Render(dt);
 
         EndMode2D();

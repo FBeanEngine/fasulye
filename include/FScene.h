@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include "FObject.h"
 #include "FPlayer.h"
+#include "FCamera.h"
 #include <memory>
 
 class FScene
@@ -14,7 +15,7 @@ public:
     int AddObject(FObject object);
     int RemoveObject(int index);
     FObject GetObject(int index);
-    Camera2D camera;
+    FCamera camera;
 
     void Physics();
     void Logic(float dt);

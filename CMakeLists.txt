@@ -22,6 +22,7 @@ set(PROJECT_SOURCES
         ${PROJECT_SOURCE_DIR}/FShader.cpp
         ${PROJECT_SOURCE_DIR}/FGun.cpp
         ${PROJECT_SOURCE_DIR}/FAmmo.cpp
+        ${PROJECT_SOURCE_DIR}/FCamera.cpp
         ${PROJECT_SOURCE_DIR}/utils.cpp)
 
 
@@ -50,7 +51,6 @@ add_custom_target(copy_resources ALL
 add_dependencies(fasulye copy_resources)
 
 target_link_libraries(${PROJECT_NAME} raylib)
-
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)

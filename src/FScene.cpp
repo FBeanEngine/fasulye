@@ -12,10 +12,7 @@ FScene::FScene(SceneType type)
     {
         player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
     }
-    camera.target = player->position;
-    camera.offset = {static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)};
-    camera.rotation = 0;
-    camera.zoom = 1;
+    camera.AddEffect(CameraEffect::Shake);
 }
 
 FScene::~FScene()
@@ -74,10 +71,8 @@ void FScene::Logic(float dt)
 
 void FScene::Render(float dt)
 {
-    Vector2 vec = GetScreenToWorld2D(GetMousePosition(), camera);
-    camera.target = LerpVector2(camera.target, {(player->position.x + vec.x) / 2, (player->position.y + vec.y) / 2}, 0.035f);
-    // camera.target = SmoothDamp(camera.target, {(player->position.x + vec.x) / 2, (player->position.y + vec.y) / 2}, new Vector2{0, 0}, 0.01f, 750, dt);
-    // camera.target = {(player->position.x + vec.x) / 2, (player->position.y + vec.y) / 2};
+    Vector2 vec = GetScreenToWorld2D(GetMousePosition(), camera.GetCamera());
+    camera.SetTarget({player->position.x + 48, player->position.y + 40});
     for (int i = 0; i < objects.size(); i++)
     {
         objects[i].Draw(dt);
