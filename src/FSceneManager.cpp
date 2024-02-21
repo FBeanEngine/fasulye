@@ -2,9 +2,9 @@
 #include <memory>
 
 // initialize static variables
-int FSceneManager::m_loadadSceneCount;
-int FSceneManager::m_sceneCount;
-int FSceneManager::m_active_scene;
+int FSceneManager::m_loadadSceneCount = 0;
+int FSceneManager::m_sceneCount = 0;
+int FSceneManager::m_active_scene = -1;
 std::vector<std::unique_ptr<FScene>> FSceneManager::m_sceneList;
 
 FSceneManager::FSceneManager()
