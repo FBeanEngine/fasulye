@@ -8,7 +8,7 @@ class FObject
 {
 public:
     FObject();
-    ~FObject();
+    virtual ~FObject();
 
     virtual void Update(float dt);
     virtual void Draw(float dt);

@@ -7,7 +7,7 @@ class FAmmo : public FObject
 {
 public:
     FAmmo(Vector2 position, Vector2 target, int damage, int range, int bulletSpeed, Texture2D texture);
-    ~FAmmo();
+    ~FAmmo() override;
     void Update(float dt) override;
     void Draw(float dt) override;
 
