@@ -12,7 +12,8 @@ FScene::FScene(SceneType type)
     {
         player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
     }
-    camera.AddEffect(CameraEffect::Shake);
+    camera.AddEffect(CameraEffect::None);
+    // camera.AddEffect(CameraEffect::Shake);
 }
 
 FScene::~FScene()

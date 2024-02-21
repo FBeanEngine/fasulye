@@ -9,11 +9,11 @@ FGame::FGame()
     InitWindow(1280, 720, "FSun");
     SetTargetFPS(120);
 
-    SceneMenager = FSceneManager();
+    // SceneMenager = FSceneManager();
     std::unique_ptr<FScene> scene = std::unique_ptr<FScene>(new FScene(SceneType::SpaceStation));
-    SceneMenager.AddScene(std::move(scene));
+    FSceneManager::AddScene(std::move(scene));
 
-    SceneMenager.SetActiveScene(0);
+    FSceneManager::SetActiveScene(0);
 }
 
 FGame::~FGame()
@@ -48,7 +48,7 @@ void FGame::Run()
         float dt = GetFrameTime();
         // DrawText("Fasulye", GetScreenWidth() / 2, GetScreenHeight() / 2, 20, WHITE);
 
-        std::unique_ptr<FScene> &activeScene = SceneMenager.GetActiveScene();
+        std::unique_ptr<FScene> &activeScene = FSceneManager::GetActiveScene();
         // Physics update loop
         activeScene->Physics();
         // Game logic update loop
