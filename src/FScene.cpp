@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include "utils.h"
 #include <iostream>
+#include <memory>
 
 FScene::FScene()
 {
@@ -22,9 +23,9 @@ void FScene::Init()
     // init scene that effect fSceneManager
 }
 
-int FScene::AddObject(FObject object)
+int FScene::AddObject(std::unique_ptr<FObject> object)
 {
-    objects.push_back(object);
+    objects.push_back(std::move(object));
     return objects.size() - 1;
 }
 
@@ -47,14 +48,14 @@ FObject FScene::GetObject(int index)
 {
     if (index >= objects.size())
     {
-        return objects[0];
+        return *objects[0];
     }
     else if (index < 0)
     {
-        return objects[0];
+        return *objects[0];
     }
 
-    return objects[index];
+    return *objects[index];
 }
 
 void FScene::Physics()
@@ -67,7 +68,7 @@ void FScene::Logic(float dt)
     player->Update(dt);
     for (int i = 0; i < objects.size(); i++)
     {
-        objects[i].Update(dt);
+        objects[i]->Update(dt);
     }
 }
 
@@ -75,9 +76,10 @@ void FScene::Render(float dt)
 {
     Vector2 vec = GetScreenToWorld2D(GetMousePosition(), camera.GetCamera());
     camera.SetTarget({player->position.x + 48, player->position.y + 40});
+    std::cout << "FScene::Render()" << objects.size() << std::endl;
     for (int i = 0; i < objects.size(); i++)
     {
-        objects[i].Draw(dt);
+        objects[i]->Draw(dt);
     }
     this->player->SetMousePosition(vec);
     this->player->Draw(dt);

@@ -13,7 +13,7 @@ public:
     FScene();
     ~FScene();
     virtual void Init();
-    int AddObject(FObject object);
+    int AddObject(std::unique_ptr<FObject> object);
     int RemoveObject(int index);
     FObject GetObject(int index);
     FCamera camera;
@@ -25,5 +25,5 @@ public:
 protected:
     SceneType type;
     std::unique_ptr<FPlayer> player;
-    std::vector<FObject> objects;
+    std::vector<std::unique_ptr<FObject>> objects;
 };
