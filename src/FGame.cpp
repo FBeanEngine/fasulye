@@ -4,11 +4,15 @@
 #include "FSceneManager.h"
 #include <iostream>
 #include "FTestWorld.h"
+#include "FMainMenu.h"
 
 FGame::FGame()
 {
     InitWindow(1280, 720, "FSun");
     SetTargetFPS(120);
+
+    std::unique_ptr<FScene> mainMenu = std::unique_ptr<FScene>(new FMainMenu());
+    FSceneManager::AddScene(std::move(mainMenu));
 
     // SceneMenager = FSceneManager();
     std::unique_ptr<FScene> scene = std::unique_ptr<FScene>(new FTestWorld());

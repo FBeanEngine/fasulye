@@ -1,13 +1,13 @@
 #pragma once
 #include "FScene.h"
 
-class FTestWorld : public FScene
+class FMainMenu : public FScene
 {
 public:
-    FTestWorld();
-    ~FTestWorld();
+    FMainMenu();
+    ~FMainMenu();
     void Init();
-    void BeforeLoad() override;
+    void Render(float dt) override;
 
 private:
     bool m_isActive;

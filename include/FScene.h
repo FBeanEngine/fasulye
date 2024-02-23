@@ -18,6 +18,7 @@ public:
     FObject GetObject(int index);
     FCamera camera;
 
+    virtual void BeforeLoad();
     virtual void Physics();
     virtual void Logic(float dt);
     virtual void Render(float dt);

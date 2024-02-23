@@ -1,11 +1,13 @@
 #include "FSceneManager.h"
 #include <memory>
+#include <thread>
 
 // initialize static variables
 int FSceneManager::m_loadadSceneCount = 0;
 int FSceneManager::m_sceneCount = 0;
 int FSceneManager::m_active_scene = -1;
 std::vector<std::unique_ptr<FScene>> FSceneManager::m_sceneList;
+std::future<void> FSceneManager::m_mapLoaderThread;
 
 FSceneManager::FSceneManager()
 {
@@ -47,8 +49,22 @@ int FSceneManager::SetActiveScene(int index)
 
 int FSceneManager::LoadScene(int index)
 {
-    m_active_scene = index;
+    m_mapLoaderThread = std::async(std::launch::async, &FScene::BeforeLoad, m_sceneList[index].get());
+    // m_active_scene = index;
     return index;
+}
+
+bool FSceneManager::IsSceneReady()
+{
+    bool is_ready = m_mapLoaderThread.wait_for(std::chrono::seconds(0)) == std::future_status::ready;
+    if (is_ready)
+    {
+        m_loadadSceneCount += 1;
+        // TODO: burası şu an sürekli 1 yapıyor burayı dinamik yap
+        m_active_scene = 1;
+        m_sceneList[m_active_scene]->Init();
+    }
+    return is_ready;
 }
 
 void FSceneManager::AddObjectToActiveScene(std::unique_ptr<FObject> object)

@@ -24,6 +24,7 @@ set(PROJECT_SOURCES
         ${PROJECT_SOURCE_DIR}/FAmmo.cpp
         ${PROJECT_SOURCE_DIR}/FCamera.cpp
         ${PROJECT_SOURCE_DIR}/FTestWorld.cpp
+        ${PROJECT_SOURCE_DIR}/FMainMenu.cpp
         ${PROJECT_SOURCE_DIR}/utils.cpp)
 
 

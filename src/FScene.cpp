@@ -24,6 +24,11 @@ void FScene::Init()
     // init scene that effect fSceneManager
 }
 
+void FScene::BeforeLoad()
+{
+    // init scene that effect fSceneManager
+}
+
 int FScene::AddObject(std::unique_ptr<FObject> object)
 {
     objects.push_back(std::move(object));

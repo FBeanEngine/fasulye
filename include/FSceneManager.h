@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include <future>
 #include "FScene.h"
 
 class FSceneManager
@@ -14,6 +15,7 @@ public:
     static std::unique_ptr<FScene> &GetActiveScene();
     static int SetActiveScene(int index);
     static int LoadScene(int index);
+    static bool IsSceneReady();
     static void AddObjectToActiveScene(std::unique_ptr<FObject> object);
 
 private:
@@ -22,4 +24,5 @@ private:
 
     static int m_active_scene;
     static std::vector<std::unique_ptr<FScene>> m_sceneList;
+    static std::future<void> m_mapLoaderThread;
 };
