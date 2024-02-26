@@ -1,6 +1,6 @@
 #include "FInputManager.h"
-#include "math.h"
 #include "FCamera.h"
+#include <cmath>
 
 FInputManager::FInputManager() {}
 
@@ -8,9 +8,9 @@ Vector2 FInputManager::GetAimVector(Vector2 origin)
 {
     Vector2 mousePosition = GetScreenToWorld2D(GetMousePosition(), FCamera::GetCamera());
 
-	Vector2 direction = {mousePosition.x - origin.x, origin.y - m_position.y};
-	float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-	return {direction.x / length, direction.y / length};
+    Vector2 direction = {mousePosition.x - origin.x, origin.y - mousePosition.y};
+    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    return {direction.x / length, direction.y / length};
 }
 
 Vector2 FInputManager::GetMovementVector()
