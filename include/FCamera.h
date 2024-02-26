@@ -7,7 +7,7 @@
 class FCamera
 {
 private:
-    Camera2D m_camera;
+    static Camera2D m_camera;
     std::vector<CameraEffect> m_effects;
 
 public:
@@ -21,5 +21,5 @@ public:
     FCameraViewport GetCameraViewport();
     void AddEffect(CameraEffect effect);
     void RemoveEffect(CameraEffect effect);
-    Camera2D GetCamera() { return m_camera; }
+    static Camera2D GetCamera() { return m_camera; }
 };

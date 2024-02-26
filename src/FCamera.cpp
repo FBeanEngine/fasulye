@@ -5,17 +5,11 @@
 FCamera::FCamera()
 {
     m_camera.target = { 0.0f, 0.0f };
-    m_camera.offset = { GetScreenWidth()/2.0f, GetScreenHeight()/2.0f };
-    m_camera.rotation = 0.0f;
-    m_camera.zoom = 1.0f;
 }
 
 FCamera::FCamera(Vector2 target)
 {
     m_camera.target = target;
-    m_camera.offset = { GetScreenWidth()/2.0f, GetScreenHeight()/2.0f };
-    m_camera.rotation = 0.0f;
-    m_camera.zoom = 1.0f;
 }
 
 void FCamera::SetTarget(Vector2 target) {
@@ -60,4 +54,11 @@ void FCamera::RemoveEffect(CameraEffect effect) {
             break;
         }
     }
+}
+
+Camera2D FCamera::m_camera = {
+    target = { 0.0f, 0.0f };
+    offset = { GetScreenWidth()/2.0f, GetScreenHeight()/2.0f };
+    rotation = 0.0f;
+    zoom = 1.0f;
 }
