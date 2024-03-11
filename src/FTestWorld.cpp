@@ -63,7 +63,9 @@ void FTestWorld::Render(float dt)
             	{
             	    DrawRectangle(x, y, 32, 32, GREEN);
             	}
-        	}	
+			} else {
+				DrawRectangle(x, y, 32, 32, BLUE);
+			}
     	}
 	}
 
