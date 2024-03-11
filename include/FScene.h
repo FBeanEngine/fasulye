@@ -5,6 +5,7 @@
 #include "FObject.h"
 #include "FPlayer.h"
 #include "FCamera.h"
+#include "FGrid.h"
 #include <memory>
 
 class FScene
@@ -25,6 +26,5 @@ public:
 
 protected:
     SceneType type;
-    std::unique_ptr<FPlayer> player;
     std::vector<std::unique_ptr<FObject>> objects;
 };

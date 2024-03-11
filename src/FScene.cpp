@@ -64,44 +64,14 @@ FObject FScene::GetObject(int index)
     return *objects[index];
 }
 
-void FScene::Physics()
-{
-    // ToDo: Collision check
+void FScene::Physics() {
+
 }
 
-void FScene::Logic(float dt)
-{
-    std::vector<int> destroyedObjects;
-    player->Update(dt);
-    for (int i = 0; i < objects.size(); i++)
-    {
-        if (objects[i]->isDestroyed)
-        {
-            destroyedObjects.push_back(i);
-        }
-        else
-        {
-            objects[i]->Update(dt);
-        }
-    }
-    for (size_t i = 0; i < destroyedObjects.size(); i++)
-    {
-        objects[destroyedObjects[i]].reset();
-        objects.erase(objects.begin() + destroyedObjects[i]);
-    }
-    destroyedObjects.clear();
+void FScene::Logic(float dt) {
+
 }
 
-void FScene::Render(float dt)
-{
-    Vector2 vec = GetScreenToWorld2D(GetMousePosition(), camera.GetCamera());
-    camera.SetTarget({player->position.x + 48, player->position.y + 40});
-    // std::cout << "FScene::Render()" << objects.size() << std::endl;
-    for (int i = 0; i < objects.size(); i++)
-    {
-        objects[i]->SetMousePosition(vec);
-        objects[i]->Draw(dt);
-    }
-    this->player->SetMousePosition(vec);
-    this->player->Draw(dt);
+void FScene::Render(float dt) {
+    
 }

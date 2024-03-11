@@ -51,8 +51,8 @@ void FCamera::SetRotation(float rotation)
 
 FCameraViewport FCamera::GetCameraViewport()
 {
-    Vector2 topLeft = m_camera.target;
-    Vector2 bottomRight = {m_camera.target.x + GetScreenWidth(), m_camera.target.y + GetScreenHeight()};
+    Vector2 topLeft = {m_camera.target.x - GetScreenWidth() / 2, m_camera.target.y - GetScreenHeight() / 2};
+    Vector2 bottomRight = {m_camera.target.x + GetScreenWidth() / 2, m_camera.target.y + GetScreenHeight() / 2};
     return {topLeft, bottomRight};
 }
 

@@ -1,5 +1,9 @@
 #include "utils.h"
 #include <cmath>
+#include <time.h>
+#include <random>
+#include "raylib.h"
+
 
 Vector2 Vector2Distance(Vector2 a, Vector2 b)
 {
@@ -58,4 +62,18 @@ Vector2 SmoothDamp(Vector2 current, Vector2 target, Vector2 *currentVelocity, fl
     }
 
     return Vector2{output_x, output_y};
+}
+
+int RandomRange(int min, int max) {
+    // Use a random_device to seed the random number generator
+    std::random_device rd;
+    
+    // Use mt19937 as the random number engine
+    std::mt19937 gen(rd());
+    
+    // Define the distribution for the range [min, max]
+    std::uniform_int_distribution<int> distribution(min, max);
+    
+    // Generate a random integer within the specified range
+    return distribution(gen);
 }

@@ -11,6 +11,7 @@ set(PROJECT_SOURCE_DIR ${PROJECT_DIR}/src)
 set(PROJECT_SOURCES 
         ${PROJECT_SOURCE_DIR}/main.cpp
         ${PROJECT_SOURCE_DIR}/FGame.cpp
+        ${PROJECT_SOURCE_DIR}/FGrid.cpp
         ${PROJECT_SOURCE_DIR}/FItem.cpp
         ${PROJECT_SOURCE_DIR}/FObject.cpp
         ${PROJECT_SOURCE_DIR}/FPlayer.cpp

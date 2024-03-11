@@ -15,7 +15,6 @@ FMainMenu::~FMainMenu()
 
 void FMainMenu::Init()
 {
-	player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
 	// TODO
 }
 
