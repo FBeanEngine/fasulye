@@ -2,6 +2,8 @@
 
 FAnimationClip::FAnimationClip(const char *fileName, int frame, int width, int height, int speed, bool inverse, bool wihoutBlock)
 {
+	scale = 1;
+	offset = {0, 0};
 	this->speed = speed;
 	this->frame = frame;
 	this->counter = 0.f;
@@ -46,5 +48,15 @@ void FAnimationClip::Play(Vector2 position, float dt)
 		}
 		counter = 0.f;
 	}
-	DrawTexturePro(tileset, clip[int(counter)], {position.x, position.y, float(width), float(height)}, {0.f, 0.f}, 0, WHITE);
+	DrawTexturePro(tileset, clip[int(counter)], {position.x + offset.x * scale, position.y + offset.y * scale, float(width) * scale, float(height) * scale}, {0.f, 0.f}, 0, WHITE);
+}
+
+void FAnimationClip::setScale(int scale)
+{
+	this->scale = scale;
+}
+
+void FAnimationClip::setOffset(Vector2 offset)
+{
+	this->offset = offset;
 }

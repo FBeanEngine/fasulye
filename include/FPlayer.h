@@ -22,7 +22,8 @@ public:
     void Update(float dt);
     void Draw(float dt);
 
-    FAnimation animation;
+    FAnimation up_animation;
+    FAnimation down_animation;
     void SetMousePosition(Vector2 mousePosition);
 
 private:
@@ -34,4 +35,5 @@ private:
     bool isDead;
     FShader shader;
     Vector2 m_mousePosition;
+    std::string lastMovementDirection;
 };
