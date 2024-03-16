@@ -71,27 +71,28 @@ void FTestWorld::Render(float dt)
 	
     this->player->SetMousePosition(vec);
     this->player->Draw(dt);
+
 }
 
 void FTestWorld::Logic(float dt)
 {
-    std::vector<int> destroyedObjects;
-    player->Update(dt);
-    for (int i = 0; i < objects.size(); i++)
-    {
-        if (objects[i]->isDestroyed)
-        {
-            destroyedObjects.push_back(i);
-        }
-        else
-        {
-            objects[i]->Update(dt);
-        }
-    }
-    for (size_t i = 0; i < destroyedObjects.size(); i++)
-    {
-        objects[destroyedObjects[i]].reset();
-        objects.erase(objects.begin() + destroyedObjects[i]);
-    }
-    destroyedObjects.clear();
+	std::vector<int> destroyedObjects;
+	player->Update(dt);
+	for (int i = 0; i < objects.size(); i++)
+	{
+		if (objects[i]->isDestroyed)
+		{
+			destroyedObjects.push_back(i);
+		}
+		else
+		{
+			objects[i]->Update(dt);
+		}
+	}
+	for (size_t i = 0; i < destroyedObjects.size(); i++)
+	{
+		objects[destroyedObjects[i]].reset();
+		objects.erase(objects.begin() + destroyedObjects[i]);
+	}
+	destroyedObjects.clear();
 }
