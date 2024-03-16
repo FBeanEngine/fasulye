@@ -110,9 +110,9 @@ void FPlayer::Update(float dt)
     }
     else if (movementVector.x != 0 || movementVector.y != 0)
     {
+        //float beforeX = this->position.x;
         this->position.x += movementVector.x * 150 * dt;
         this->position.y += movementVector.y * 150 * dt;
-        // up_animation.BindAnimation("left");
     }
     float angle = Vector2LineAngle({this->position.x + 16 * 5, this->position.y + 16 * 5}, m_mousePosition) * 180 / PI + 180;
 

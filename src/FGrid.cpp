@@ -6,9 +6,6 @@ FGrid::FGrid(int width, int height)
     for (int x = 0; x < m_grid.size(); x++)
     {
         m_grid[x].resize(height);
-        for (int y = 0; y < m_grid[x].size(); y++) {
-            m_grid[x][y] = 0;
-        }
     }
 }
 

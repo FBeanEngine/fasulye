@@ -10,7 +10,7 @@
 FScene::FScene()
 {
     std::cout << "FScene constructor: " << std::endl;
-    camera.AddEffect(CameraEffect::None);
+    //camera.AddEffect(CameraEffect::None);
     // camera.AddEffect(CameraEffect::Shake);
 }
 

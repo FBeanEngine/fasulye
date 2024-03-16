@@ -11,4 +11,5 @@ public:
     static PerformedAction GetPerfomedAction();
     static Vector2 GetMovementVector();
     static Vector2 GetAimVector(Vector2 origin);
+    static Vector2 GetMouse();
 };

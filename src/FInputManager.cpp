@@ -44,3 +44,8 @@ PerformedAction FInputManager::GetPerfomedAction()
 
     return PerformedAction::NoneAction;
 }
+
+Vector2 FInputManager::GetMouse() {
+    Vector2 mousePosition = GetScreenToWorld2D(GetMousePosition(), FCamera::GetCamera());
+    return mousePosition;
+}
