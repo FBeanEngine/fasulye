@@ -26,10 +26,12 @@ int FGrid::GetTileWithWorldPosition(Vector2 position)
     return GetTile(x, y);
 }
 
-int FGrid::GetWidth() {
+int FGrid::GetWidth()
+{
     return m_grid.size();
 }
 
-int FGrid::GetHeight() {
+int FGrid::GetHeight()
+{
     return m_grid[0].size();
 }

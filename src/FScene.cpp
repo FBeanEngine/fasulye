@@ -10,7 +10,7 @@
 FScene::FScene()
 {
     std::cout << "FScene constructor: " << std::endl;
-    //camera.AddEffect(CameraEffect::None);
+    // camera.AddEffect(CameraEffect::None);
     // camera.AddEffect(CameraEffect::Shake);
 }
 
@@ -64,14 +64,14 @@ FObject FScene::GetObject(int index)
     return *objects[index];
 }
 
-void FScene::Physics() {
-
+void FScene::Physics()
+{
 }
 
-void FScene::Logic(float dt) {
-
+void FScene::Logic(float dt)
+{
 }
 
-void FScene::Render(float dt) {
-    
+void FScene::Render(float dt)
+{
 }

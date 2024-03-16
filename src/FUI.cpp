@@ -1,19 +1,23 @@
 #include "FUI.h"
 #include "FInputManager.h"
 
-FUI::FUI(Vector2 position, Vector2 size, std::string name) {
+FUI::FUI(Vector2 position, Vector2 size, std::string name)
+{
     m_position = position;
     m_size = size;
     m_name = name;
 }
 
-FUIEvent FUI::Logic() {
+FUIEvent FUI::Logic()
+{
     uiState = UIComponentState::None;
     Vector2 mousePosition = FInputManager::GetMouse();
 
-    if (CheckCollisionPointRec(mousePosition, {m_position.x, m_position.y, m_size.x, m_size.y})) {
+    if (CheckCollisionPointRec(mousePosition, {m_position.x, m_position.y, m_size.x, m_size.y}))
+    {
         uiState = UIComponentState::MouseHover;
-        if (FInputManager::GetPerfomedAction() == PerformedAction::LeftHandUse) {
+        if (FInputManager::GetPerfomedAction() == PerformedAction::LeftHandUse)
+        {
             uiState = UIComponentState::MouseClicked;
         }
     }
@@ -21,6 +25,7 @@ FUIEvent FUI::Logic() {
     return {m_name, uiState};
 }
 
-void FUI::Draw() {
+void FUI::Draw()
+{
     //* Populate in child clases
 }
