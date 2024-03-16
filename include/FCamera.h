@@ -19,6 +19,7 @@ public:
     void SetRotation(float rotation);
 
     FCameraViewport GetCameraViewport();
+    Rectangle GetCameraViewportAsRectangle();
     void AddEffect(CameraEffect effect);
     void RemoveEffect(CameraEffect effect);
     static Camera2D GetCamera() { return m_camera; }

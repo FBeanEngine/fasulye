@@ -11,7 +11,7 @@ void FTestWorld::Init()
 {
 	// Works after loading but only called when setActiveScene called
 	player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
-	//camera.AddEffect(CameraEffect::SmoothFollow);
+	camera.AddEffect(CameraEffect::NoneEffect);
 }
 
 void FTestWorld::BeforeLoad()
@@ -38,20 +38,16 @@ void FTestWorld::Render(float dt)
     Vector2 vec = GetScreenToWorld2D(GetMousePosition(), camera.GetCamera());
     camera.SetTarget({player->position.x + 48, player->position.y + 40});
     
-    FCameraViewport cameraBoundaries = camera.GetCameraViewport();
-
-	for (int x = cameraBoundaries.topLeft.x; x <= cameraBoundaries.bottomRight.x; x += 32)
+	Rectangle cameraBox = camera.GetCameraViewportAsRectangle();
+	DrawRectangle(cameraBox.x - 64, cameraBox.y - 64, cameraBox.width + 64, cameraBox.height + 64, BLUE);
+	
+	for (int x = RoundAccordingToRef(cameraBox.x, 32); x < grid->GetWidth() * 32; x += 32)
 	{
-    	for (int y = cameraBoundaries.topLeft.y; y <= cameraBoundaries.bottomRight.y; y += 32)
+    	for (int y = RoundAccordingToRef(cameraBox.y, 32); y < grid->GetHeight() * 32; y += 32)
     	{
-        	// Convert screen coordinates to grid coordinates
-     	   	int gridX = x / 32;
-        	int gridY = y / 32;
-
-    	    // Check if the grid tile is within bounds
-       	 	if (gridX >= 0 && gridX < grid->GetWidth() && gridY >= 0 && gridY < grid->GetHeight())
+       	 	if (CheckCollisionRecs({(float)x, (float)y, 32, 32}, cameraBox))
 			{
-            	if (grid->GetTile(gridX, gridY) == 1)
+            	if (grid->GetTileWithWorldPosition({(float)x, (float)y}) == 1)
             	{
             	    DrawRectangle(x, y, 32, 32, RED);
             	}
@@ -59,12 +55,12 @@ void FTestWorld::Render(float dt)
             	{
             	    DrawRectangle(x, y, 32, 32, GREEN);
             	}
-
-			} else {
-				// Fİll up the remaing space with blue
-				DrawRectangle(x, y, 32, 32, BLUE);
 			}
+
+			if (y > (cameraBox.y + cameraBox.height + 64)) break;
     	}
+
+		if (x > (cameraBox.x + cameraBox.width + 64)) break;
 	}
 
     for (int i = 0; i < objects.size(); i++)

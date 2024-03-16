@@ -20,13 +20,13 @@ enum ShaderType
 };
 
 enum CameraEffect {
-    None,
+    NoneEffect,
     Shake,
     SmoothFollow
 };
 
 enum UIComponentState {
-    None,
+    NoneEvent,
     MouseHover,
     MouseClicked
 };

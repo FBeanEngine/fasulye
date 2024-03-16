@@ -32,7 +32,7 @@ void FCamera::SetTarget(Vector2 target)
             m_camera.target.y = target.y + GetRandomValue(-1, 1);
         }
 
-        if (effect == CameraEffect::None)
+        if (effect == CameraEffect::NoneEffect)
         {
             m_camera.target = target;
         }
@@ -51,8 +51,10 @@ void FCamera::SetRotation(float rotation)
 
 FCameraViewport FCamera::GetCameraViewport()
 {
-    Vector2 topLeft = {m_camera.target.x - GetScreenWidth() / 2, m_camera.target.y - GetScreenHeight() / 2};
-    Vector2 bottomRight = {m_camera.target.x + GetScreenWidth() / 2, m_camera.target.y + GetScreenHeight() / 2};
+    int width = GetScreenWidth();
+    int height = GetScreenHeight();
+    Vector2 topLeft = {m_camera.target.x - width / 2, m_camera.target.y - height / 2};
+    Vector2 bottomRight = {m_camera.target.x + width / 2, m_camera.target.y + height / 2};
     return {topLeft, bottomRight};
 }
 
@@ -71,4 +73,11 @@ void FCamera::RemoveEffect(CameraEffect effect)
             break;
         }
     }
+}
+
+Rectangle FCamera::GetCameraViewportAsRectangle() {
+    int width = GetScreenWidth();
+    int height = GetScreenHeight();
+    Vector2 topLeft = {m_camera.target.x - width / 2, m_camera.target.y - height / 2};
+    return {topLeft.x, topLeft.y, (float)width, (float)height};
 }

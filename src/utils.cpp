@@ -77,3 +77,12 @@ int RandomRange(int min, int max) {
     // Generate a random integer within the specified range
     return distribution(gen);
 }
+
+int RoundAccordingToRef(int inputValue, int referenceValue) {
+    if (inputValue <= 0) return 0;
+
+    int quotient = inputValue / referenceValue;
+    int lower = quotient * referenceValue;
+    int upper = lower + referenceValue;
+    return lower;
+}
