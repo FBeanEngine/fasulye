@@ -18,4 +18,6 @@ private:
     int m_index;
     std::unique_ptr<FPlayer> player;
     std::unique_ptr<FGrid> grid;
+    Texture2D red_sand_1;
+    Texture2D red_sand_2;
 };

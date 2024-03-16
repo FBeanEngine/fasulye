@@ -12,6 +12,10 @@ void FTestWorld::Init()
 	// Works after loading but only called when setActiveScene called
 	player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
 	camera.AddEffect(CameraEffect::NoneEffect);
+	camera.SetZoom(2.0f);
+
+	red_sand_1 = LoadTexture("resources/assets/tiles/red_sand_1.png");
+	red_sand_2 = LoadTexture("resources/assets/tiles/red_sand_2.png");
 }
 
 void FTestWorld::BeforeLoad()
@@ -29,49 +33,56 @@ void FTestWorld::BeforeLoad()
 				grid->SetTile(i, j, 1);
 		}
 	}
+	// std::cout << grid->GetWidth() << std::endl;
+}
 
-	std::cout << grid->GetWidth() << std::endl;
+FTestWorld::~FTestWorld()
+{
+	std::cout << "FTestWorld destructor" << std::endl;
+	UnloadTexture(red_sand_1);
+	UnloadTexture(red_sand_2);
 }
 
 void FTestWorld::Render(float dt)
 {
-    Vector2 vec = GetScreenToWorld2D(GetMousePosition(), camera.GetCamera());
-    camera.SetTarget({player->position.x + 48, player->position.y + 40});
-    
+	Vector2 vec = GetScreenToWorld2D(GetMousePosition(), camera.GetCamera());
+	camera.SetTarget({player->position.x + 48, player->position.y + 40});
+
 	Rectangle cameraBox = camera.GetCameraViewportAsRectangle();
 	DrawRectangle(cameraBox.x - 64, cameraBox.y - 64, cameraBox.width + 64, cameraBox.height + 64, BLUE);
-	
+
 	for (int x = RoundAccordingToRef(cameraBox.x, 32); x < grid->GetWidth() * 32; x += 32)
 	{
-    	for (int y = RoundAccordingToRef(cameraBox.y, 32); y < grid->GetHeight() * 32; y += 32)
-    	{
-       	 	if (CheckCollisionRecs({(float)x, (float)y, 32, 32}, cameraBox))
+		for (int y = RoundAccordingToRef(cameraBox.y, 32); y < grid->GetHeight() * 32; y += 32)
+		{
+			if (CheckCollisionRecs({(float)x, (float)y, 32, 32}, cameraBox))
 			{
-            	if (grid->GetTileWithWorldPosition({(float)x, (float)y}) == 1)
-            	{
-            	    DrawRectangle(x, y, 32, 32, RED);
-            	}
-            	else
-            	{
-            	    DrawRectangle(x, y, 32, 32, GREEN);
-            	}
+				if (grid->GetTileWithWorldPosition({(float)x, (float)y}) == 1)
+				{
+					DrawTexture(red_sand_1, x, y, WHITE);
+				}
+				else
+				{
+					DrawTexture(red_sand_2, x, y, WHITE);
+				}
 			}
 
-			if (y > (cameraBox.y + cameraBox.height + 64)) break;
-    	}
+			if (y > (cameraBox.y + cameraBox.height + 64))
+				break;
+		}
 
-		if (x > (cameraBox.x + cameraBox.width + 64)) break;
+		if (x > (cameraBox.x + cameraBox.width + 64))
+			break;
 	}
 
-    for (int i = 0; i < objects.size(); i++)
-    {
-        objects[i]->SetMousePosition(vec);
-        objects[i]->Draw(dt);
-    }
-	
-    this->player->SetMousePosition(vec);
-    this->player->Draw(dt);
+	for (int i = 0; i < objects.size(); i++)
+	{
+		objects[i]->SetMousePosition(vec);
+		objects[i]->Draw(dt);
+	}
 
+	this->player->SetMousePosition(vec);
+	this->player->Draw(dt);
 }
 
 void FTestWorld::Logic(float dt)

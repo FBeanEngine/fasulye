@@ -18,56 +18,56 @@ FPlayer::FPlayer(Vector2 position)
     // ----- upper body animation -----
 
     FAnimationClip forwardAnim = FAnimationClip("resources/assets/up_forward.png", 1, 32, 32, 1, false, false);
-    forwardAnim.setScale(5);
+    // forwardAnim.setScale(5);
     up_animation.AddAnimation("forward", forwardAnim);
 
     FAnimationClip forwardRightAnim = FAnimationClip("resources/assets/up_forward_right.png", 1, 32, 32, 1, false, false);
-    forwardRightAnim.setScale(5);
+    // forwardRightAnim.setScale(5);
     up_animation.AddAnimation("forward_right", forwardRightAnim);
 
     FAnimationClip rightAnim = FAnimationClip("resources/assets/up_right.png", 1, 32, 32, 1, false, false);
-    rightAnim.setScale(5);
+    // rightAnim.setScale(5);
     up_animation.AddAnimation("right", rightAnim);
 
     FAnimationClip backRightAnim = FAnimationClip("resources/assets/up_back_right.png", 1, 32, 32, 1, false, false);
-    backRightAnim.setScale(5);
+    // backRightAnim.setScale(5);
     up_animation.AddAnimation("back_right", backRightAnim);
 
     FAnimationClip backAnim = FAnimationClip("resources/assets/up_back.png", 1, 32, 32, 1, false, false);
-    backAnim.setScale(5);
+    // backAnim.setScale(5);
     up_animation.AddAnimation("back", backAnim);
 
     FAnimationClip backLeftAnim = FAnimationClip("resources/assets/up_back_left.png", 1, 32, 32, 1, false, false);
-    backLeftAnim.setScale(5);
+    // backLeftAnim.setScale(5);
     up_animation.AddAnimation("back_left", backLeftAnim);
 
     FAnimationClip leftAnim = FAnimationClip("resources/assets/up_left.png", 1, 32, 32, 1, false, false);
-    leftAnim.setScale(5);
+    // leftAnim.setScale(5);
     up_animation.AddAnimation("left", leftAnim);
 
     FAnimationClip forwardLeftAnim = FAnimationClip("resources/assets/up_forward_left.png", 1, 32, 32, 1, false, false);
-    forwardLeftAnim.setScale(5);
+    // forwardLeftAnim.setScale(5);
     up_animation.AddAnimation("forward_left", forwardLeftAnim);
 
     // ----- lower body animation -----
 
     FAnimationClip forwardAnimDown = FAnimationClip("resources/assets/down_forward.png", 1, 32, 32, 1, false, false);
-    forwardAnimDown.setScale(5);
+    // forwardAnimDown.setScale(5);
     forwardAnimDown.setOffset({0, 12});
     down_animation.AddAnimation("forward", forwardAnimDown);
 
     FAnimationClip rightAnimDown = FAnimationClip("resources/assets/down_right.png", 1, 32, 32, 1, false, false);
-    rightAnimDown.setScale(5);
+    // rightAnimDown.setScale(5);
     rightAnimDown.setOffset({0, 12});
     down_animation.AddAnimation("right", rightAnimDown);
 
     FAnimationClip backAnimDown = FAnimationClip("resources/assets/down_back.png", 1, 32, 32, 1, false, false);
-    backAnimDown.setScale(5);
+    // backAnimDown.setScale(5);
     backAnimDown.setOffset({0, 12});
     down_animation.AddAnimation("back", backAnimDown);
 
     FAnimationClip leftAnimDown = FAnimationClip("resources/assets/down_left.png", 1, 32, 32, 1, false, false);
-    leftAnimDown.setScale(5);
+    // leftAnimDown.setScale(5);
     leftAnimDown.setOffset({0, 12});
     down_animation.AddAnimation("left", leftAnimDown);
 
@@ -110,7 +110,7 @@ void FPlayer::Update(float dt)
     }
     else if (movementVector.x != 0 || movementVector.y != 0)
     {
-        //float beforeX = this->position.x;
+        // float beforeX = this->position.x;
         this->position.x += movementVector.x * 150 * dt;
         this->position.y += movementVector.y * 150 * dt;
     }
