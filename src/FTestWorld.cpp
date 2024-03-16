@@ -11,6 +11,7 @@ void FTestWorld::Init()
 {
 	// Works after loading but only called when setActiveScene called
 	player = std::unique_ptr<FPlayer>(new FPlayer({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}));
+	//camera.AddEffect(CameraEffect::SmoothFollow);
 }
 
 void FTestWorld::BeforeLoad()
@@ -47,14 +48,9 @@ void FTestWorld::Render(float dt)
      	   	int gridX = x / 32;
         	int gridY = y / 32;
 
-			//std::cout << gridX << std::endl;
-			//std::cout << gridY << std::endl;
-
     	    // Check if the grid tile is within bounds
        	 	if (gridX >= 0 && gridX < grid->GetWidth() && gridY >= 0 && gridY < grid->GetHeight())
 			{
-				//std::cout << "Grid is drawing" << std::endl; 
-            	// Check the grid value and render accordingly
             	if (grid->GetTile(gridX, gridY) == 1)
             	{
             	    DrawRectangle(x, y, 32, 32, RED);
@@ -63,7 +59,9 @@ void FTestWorld::Render(float dt)
             	{
             	    DrawRectangle(x, y, 32, 32, GREEN);
             	}
+
 			} else {
+				// Fİll up the remaing space with blue
 				DrawRectangle(x, y, 32, 32, BLUE);
 			}
     	}
@@ -74,6 +72,7 @@ void FTestWorld::Render(float dt)
         objects[i]->SetMousePosition(vec);
         objects[i]->Draw(dt);
     }
+	
     this->player->SetMousePosition(vec);
     this->player->Draw(dt);
 }

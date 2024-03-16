@@ -24,3 +24,9 @@ enum CameraEffect {
     Shake,
     SmoothFollow
 };
+
+enum UIComponentState {
+    None,
+    MouseHover,
+    MouseClicked
+};
