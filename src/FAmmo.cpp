@@ -36,5 +36,5 @@ void FAmmo::Update(float dt)
 
 void FAmmo::Draw(float dt)
 {
-	DrawTextureEx(m_texture, m_position, 0, 3, WHITE);
+	DrawTextureEx(m_texture, m_position, 0, 1.5, WHITE);
 }
