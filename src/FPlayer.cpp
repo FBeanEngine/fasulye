@@ -114,7 +114,7 @@ void FPlayer::Update(float dt)
         this->position.x += movementVector.x * 150 * dt;
         this->position.y += movementVector.y * 150 * dt;
     }
-    float angle = Vector2LineAngle({this->position.x + 16 * 5, this->position.y + 16 * 5}, m_mousePosition) * 180 / PI + 180;
+    float angle = Vector2LineAngle({this->position.x + 16, this->position.y + 16}, m_mousePosition) * 180 / PI + 180;
 
     // source: 8 direction movement angles from https://www.reddit.com/r/godot/comments/ypjiqs/it_might_be_helpful_360_degrees_for_godot_and_in/
     if (angle >= 22.5 && angle < 67.5)
