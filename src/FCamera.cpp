@@ -75,7 +75,8 @@ void FCamera::RemoveEffect(CameraEffect effect)
     }
 }
 
-Rectangle FCamera::GetCameraViewportAsRectangle() {
+Rectangle FCamera::GetCameraViewportAsRectangle()
+{
     int width = GetScreenWidth();
     int height = GetScreenHeight();
     Vector2 topLeft = {m_camera.target.x - width / 2, m_camera.target.y - height / 2};
