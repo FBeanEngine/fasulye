@@ -9,7 +9,7 @@ public:
     FItem(Vector2 position, Texture2D texture);
     ~FItem() override;
     void Draw(float dt) override;
-    void Physics(std::string tag) override;
+    void Physics(std::string tag, Rectangle collisionBox) override;
 
 private:
     FAnimation m_animation;

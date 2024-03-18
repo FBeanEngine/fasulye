@@ -12,7 +12,7 @@ public:
 
     virtual void Update(float dt);
     virtual void Draw(float dt);
-    virtual void Physics(std::string tag);
+    virtual void Physics(std::string tag, Rectangle collisionBox);
     void SetMousePosition(Vector2 mousePosition);
     void ActivateBoundingBox();
     void DeactivateBoundingBox();
@@ -32,4 +32,6 @@ protected:
     Vector2 m_mousePosition;
     Texture texture;
     std::string tag;
+    CanMove canMove;
+    Vector2 moveDirection;
 };

@@ -3,6 +3,14 @@
 #include <string>
 #include "enums.h"
 
+struct CanMove
+{
+    bool up;
+    bool down;
+    bool left;
+    bool right;
+};
+
 struct FBoundingBox
 {
     Vector2 min;
@@ -15,7 +23,8 @@ struct FCameraViewport
     Vector2 bottomRight;
 };
 
-struct FUIEvent {
+struct FUIEvent
+{
     std::string componentName;
     UIComponentState eventType;
 };

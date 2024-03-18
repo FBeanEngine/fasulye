@@ -21,6 +21,7 @@ public:
 
     void Update(float dt);
     void Draw(float dt);
+    void Physics(std::string tag, Rectangle collisionBox) override;
 
     FAnimation up_animation;
     FAnimation down_animation;
@@ -36,4 +37,5 @@ private:
     FShader shader;
     Vector2 m_mousePosition;
     std::string lastMovementDirection;
+    Rectangle collisionArea;
 };

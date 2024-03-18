@@ -3,6 +3,7 @@
 FObject::FObject()
 {
 	isDestroyed = false;
+	canMove = {true, true, true, true};
 	enableBoundingBox = false;
 	tag = "FObject";
 }
@@ -22,7 +23,7 @@ void FObject::Draw(float dt)
 	// TODO
 }
 
-void FObject::Physics(std::string tag)
+void FObject::Physics(std::string tag, Rectangle collisionBox)
 {
 	// TODO
 }

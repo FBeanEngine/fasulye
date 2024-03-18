@@ -76,6 +76,11 @@ FPlayer::FPlayer(Vector2 position)
     gun->SetTexture(LoadTexture("resources/assets/gun.png"));
     FSceneManager::AddObjectToActiveScene(std::move(gun));
 
+    // ----- collision -----
+    tag = "player";
+    SetBoundingBox(position.x, position.y + 12, 32, 32);
+    ActivateBoundingBox();
+
     // shader.FLoadShader("damage.fs", ShaderType::Fragment);
     // TraceLog(LOG_INFO, "Shader count: %d", shader.m_shaderCount);
 
@@ -102,18 +107,40 @@ void FPlayer::Update(float dt)
     Vector2 aimVector = m_inputManager.GetAimVector(this->position);
     PerformedAction action = m_inputManager.GetPerfomedAction();
 
+    moveDirection = movementVector;
+
     if (movementVector.x != 0 && movementVector.y != 0)
     {
         // Diagnol movement
-        this->position.x += movementVector.x * 75 * dt;
-        this->position.y += movementVector.y * 75 * dt;
+        if ((canMove.up && movementVector.y < 0) || (canMove.down && movementVector.y > 0))
+        {
+            this->position.y += movementVector.y * 75 * dt;
+        }
+        if ((canMove.left && movementVector.x < 0) || (canMove.right && movementVector.x > 0))
+        {
+            this->position.x += movementVector.x * 75 * dt;
+        }
     }
     else if (movementVector.x != 0 || movementVector.y != 0)
     {
         // float beforeX = this->position.x;
-        this->position.x += movementVector.x * 150 * dt;
-        this->position.y += movementVector.y * 150 * dt;
+        if ((canMove.up && movementVector.y < 0) || (canMove.down && movementVector.y > 0))
+        {
+            this->position.y += movementVector.y * 150 * dt;
+        }
+        if ((canMove.left && movementVector.x < 0) || (canMove.right && movementVector.x > 0))
+        {
+            this->position.x += movementVector.x * 150 * dt;
+        }
+        // this->position.x += movementVector.x * 150 * dt;
+        // this->position.y += movementVector.y * 150 * dt;
     }
+    canMove = {true, true, true, true};
+
+    // ----- update collision box -----
+    boundingBox.x = this->position.x;
+    boundingBox.y = this->position.y;
+
     float angle = Vector2LineAngle({this->position.x + 16, this->position.y + 16}, m_mousePosition) * 180 / PI + 180;
 
     // source: 8 direction movement angles from https://www.reddit.com/r/godot/comments/ypjiqs/it_might_be_helpful_360_degrees_for_godot_and_in/
@@ -199,7 +226,55 @@ void FPlayer::Draw(float dt)
         down_animation.Animate(this->position, dt);
         up_animation.Animate(this->position, dt);
     }
+    DrawRectangleLines(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height, GREEN);
     // m_gun.Draw(dt);
+}
+
+void FPlayer::Physics(std::string tag, Rectangle collisionBox)
+{
+    if (tag == "item")
+    {
+        collisionArea = GetCollisionRec(boundingBox, collisionBox);
+        std::cout << "Collision with item " << collisionArea.width << ", " << collisionArea.height << std::endl;
+        TraceLog(LOG_INFO, "Collision with item %d, %d %d %d", moveDirection.x > 0, moveDirection.y < 0, boundingBox.x < collisionBox.x, boundingBox.y < collisionBox.y);
+        if (moveDirection.x != 0 && moveDirection.y > 0 && boundingBox.y <= collisionBox.y && collisionArea.width > collisionArea.height)
+        {
+            position.y -= collisionArea.height;
+            std::cout << "Collision with item from top right" << std::endl;
+        }
+        else if (moveDirection.x != 0 && moveDirection.y < 0 && collisionArea.width > collisionArea.height)
+        {
+            position.y += collisionArea.height;
+        }
+        else
+        {
+
+            if (collisionArea.x >= boundingBox.x && moveDirection.x > 0)
+            {
+                position.x -= collisionArea.width;
+                canMove.right = false;
+            }
+            else if (collisionArea.x <= boundingBox.x && moveDirection.x < 0)
+            {
+                position.x += collisionArea.width;
+                canMove.left = false;
+            }
+            boundingBox.x = position.x;
+            collisionArea = GetCollisionRec(boundingBox, collisionBox);
+
+            if (collisionArea.y >= boundingBox.y && moveDirection.y > 0)
+            {
+                position.y -= collisionArea.height;
+                canMove.down = false;
+            }
+            else if (collisionArea.y <= boundingBox.y && moveDirection.y < 0)
+            {
+                position.y += collisionArea.height;
+                canMove.up = false;
+            }
+            boundingBox.y = position.y;
+        }
+    }
 }
 
 void FPlayer::AddItem(FItem item)

@@ -32,7 +32,7 @@ void FItem::Draw(float dt)
 	}
 }
 
-void FItem::Physics(std::string tag)
+void FItem::Physics(std::string tag, Rectangle collisionBox)
 {
 	if (tag == "ammo")
 	{

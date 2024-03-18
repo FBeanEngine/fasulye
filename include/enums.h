@@ -19,13 +19,15 @@ enum ShaderType
     Fragment
 };
 
-enum CameraEffect {
+enum CameraEffect
+{
     NoneEffect,
     Shake,
     SmoothFollow
 };
 
-enum UIComponentState {
+enum UIComponentState
+{
     NoneEvent,
     MouseHover,
     MouseClicked

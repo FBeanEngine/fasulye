@@ -46,7 +46,10 @@ void FAmmo::Draw(float dt)
 	DrawTextureEx(m_texture, m_position, 0, 1.5, WHITE);
 }
 
-void FAmmo::Physics(std::string tag)
+void FAmmo::Physics(std::string tag, Rectangle collisionBox)
 {
-	isDestroyed = true;
+	if (tag == "item")
+	{
+		isDestroyed = true;
+	}
 }

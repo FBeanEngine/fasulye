@@ -10,7 +10,7 @@ public:
     ~FAmmo() override;
     void Update(float dt) override;
     void Draw(float dt) override;
-    void Physics(std::string tag) override;
+    void Physics(std::string tag, Rectangle collisionBox) override;
 
 private:
     Vector2 m_position;

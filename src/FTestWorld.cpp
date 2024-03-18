@@ -21,7 +21,7 @@ void FTestWorld::Init()
 
 	std::cout << "FTestWorld Init" << std::endl;
 
-	std::unique_ptr<FItem> item = std::unique_ptr<FItem>(new FItem({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}, LoadTexture("resources/assets/chest.png")));
+	std::unique_ptr<FItem> item = std::unique_ptr<FItem>(new FItem({static_cast<float>(GetScreenWidth() / 2) + 64, static_cast<float>(GetScreenHeight() / 2)}, LoadTexture("resources/assets/chest.png")));
 	FSceneManager::AddObjectToActiveScene(std::move(item));
 
 	std::cout << "FTestWorld Init" << std::endl;
@@ -96,6 +96,7 @@ void FTestWorld::Render(float dt)
 
 	this->player->SetMousePosition(vec);
 	this->player->Draw(dt);
+	this->player->ShowBoundingBox();
 }
 
 void FTestWorld::Logic(float dt)
@@ -131,10 +132,19 @@ void FTestWorld::Physics(float dt)
 			{
 				if (CheckCollisionRecs(objects[i]->GetBoundingBox(), objects[j]->GetBoundingBox()))
 				{
-					objects[i]->Physics(objects[j]->GetTag());
-					objects[j]->Physics(objects[i]->GetTag());
+					objects[i]->Physics(objects[j]->GetTag(), objects[j]->GetBoundingBox());
+					objects[j]->Physics(objects[i]->GetTag(), objects[i]->GetBoundingBox());
 				}
 			}
+		}
+	}
+
+	for (int i = 0; i < objects.size(); i++)
+	{
+		if (CheckCollisionRecs(objects[i]->GetBoundingBox(), player->GetBoundingBox()))
+		{
+			objects[i]->Physics(player->GetTag(), player->GetBoundingBox());
+			player->Physics(objects[i]->GetTag(), objects[i]->GetBoundingBox());
 		}
 	}
 }
