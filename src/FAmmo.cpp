@@ -13,7 +13,7 @@ FAmmo::FAmmo(Vector2 position, Vector2 target, int damage, int range, int bullet
 	m_texture = texture;
 
 	tag = "ammo";
-	SetBoundingBox(m_position.x, m_position.y, m_texture.width, m_texture.height);
+	SetBoundingBox(m_position.x, m_position.y, m_texture.width * 1.5, m_texture.height * 1.5);
 	ActivateBoundingBox();
 
 	Vector2 direction = {m_target.x - m_position.x, m_target.y - m_position.y};

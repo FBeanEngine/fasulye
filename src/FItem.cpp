@@ -9,10 +9,10 @@ FItem::FItem(Vector2 position, Texture2D texture)
 	SetBoundingBox(position.x, position.y, texture.width, texture.height);
 	ActivateBoundingBox();
 
-	FAnimationClip idle = FAnimationClip("resources/assets/chest.png", 1, 16, 16, 5, false, false);
+	FAnimationClip idle = FAnimationClip("resources/assets/chest.png", 1, 32, 38, 5, false, false);
 	m_animation.AddAnimation("idle", idle);
 
-	FAnimationClip open = FAnimationClip("resources/assets/chest_anim.png", 6, 16, 19, 5, false, true);
+	FAnimationClip open = FAnimationClip("resources/assets/chest_anim.png", 6, 32, 38, 5, false, true);
 	m_animation.AddAnimation("open", open);
 
 	m_animation.BindAnimation("idle");
@@ -26,6 +26,10 @@ FItem::~FItem()
 void FItem::Draw(float dt)
 {
 	m_animation.Animate(position, dt);
+	if (m_animation.IsAnimationFinished("open"))
+	{
+		m_animation.BindAnimation("idle");
+	}
 }
 
 void FItem::Physics(std::string tag)
