@@ -12,6 +12,10 @@ FAmmo::FAmmo(Vector2 position, Vector2 target, int damage, int range, int bullet
 	m_bulletSpeed = bulletSpeed;
 	m_texture = texture;
 
+	tag = "ammo";
+	SetBoundingBox(m_position.x, m_position.y, m_texture.width, m_texture.height);
+	ActivateBoundingBox();
+
 	Vector2 direction = {m_target.x - m_position.x, m_target.y - m_position.y};
 	float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 	m_target = {direction.x / length, direction.y / length};
@@ -25,6 +29,9 @@ FAmmo::~FAmmo()
 
 void FAmmo::Update(float dt)
 {
+	boundingBox.x = m_position.x;
+	boundingBox.y = m_position.y;
+
 	m_position.x += m_target.x * m_bulletSpeed * dt * 10;
 	m_position.y += m_target.y * m_bulletSpeed * dt * 10;
 	m_range -= m_bulletSpeed * dt;
@@ -37,4 +44,9 @@ void FAmmo::Update(float dt)
 void FAmmo::Draw(float dt)
 {
 	DrawTextureEx(m_texture, m_position, 0, 1.5, WHITE);
+}
+
+void FAmmo::Physics(std::string tag)
+{
+	isDestroyed = true;
 }

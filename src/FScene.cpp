@@ -64,7 +64,7 @@ FObject FScene::GetObject(int index)
     return *objects[index];
 }
 
-void FScene::Physics()
+void FScene::Physics(float dt)
 {
 }
 

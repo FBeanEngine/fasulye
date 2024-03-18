@@ -57,7 +57,7 @@ void FGame::Run()
         // DrawText("Fasulye", GetScreenWidth() / 2, GetScreenHeight() / 2, 20, WHITE);
         std::unique_ptr<FScene> &activeScene = FSceneManager::GetActiveScene();
         // Physics update loop
-        activeScene->Physics();
+        activeScene->Physics(dt);
         // Game logic update loop
         activeScene->Logic(dt);
         // Drawing loop
@@ -74,11 +74,11 @@ void FGame::Run()
 
         EndDrawing();
 
-        if (IsKeyPressed(KEY_F)) {
+        if (IsKeyPressed(KEY_F))
+        {
             // see what display we are on right now
- 			int display = GetCurrentMonitor();
- 
-            
+            int display = GetCurrentMonitor();
+
             if (IsWindowFullscreen())
             {
                 // if we are full screen, then go back to the windowed size
@@ -89,9 +89,9 @@ void FGame::Run()
                 // if we are not full screen, set the window size to match the monitor we are on
                 SetWindowSize(GetMonitorWidth(display), GetMonitorHeight(display));
             }
- 
+
             // toggle the state
- 			ToggleFullscreen();
+            ToggleFullscreen();
         }
     }
 }

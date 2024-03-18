@@ -20,7 +20,7 @@ public:
     FCamera camera;
 
     virtual void BeforeLoad();
-    virtual void Physics();
+    virtual void Physics(float dt);
     virtual void Logic(float dt);
     virtual void Render(float dt);
 

@@ -3,6 +3,8 @@
 FObject::FObject()
 {
 	isDestroyed = false;
+	enableBoundingBox = false;
+	tag = "FObject";
 }
 
 FObject::~FObject()
@@ -20,7 +22,45 @@ void FObject::Draw(float dt)
 	// TODO
 }
 
+void FObject::Physics(std::string tag)
+{
+	// TODO
+}
+
 void FObject::SetMousePosition(Vector2 mousePosition)
 {
 	m_mousePosition = mousePosition;
+}
+
+void FObject::ActivateBoundingBox()
+{
+	enableBoundingBox = true;
+}
+
+void FObject::DeactivateBoundingBox()
+{
+	enableBoundingBox = false;
+}
+
+void FObject::SetBoundingBox(float x, float y, float width, float height)
+{
+	boundingBox = {x, y, width, height};
+}
+
+Rectangle FObject::GetBoundingBox()
+{
+	return boundingBox;
+}
+
+std::string FObject::GetTag()
+{
+	return tag;
+}
+
+void FObject::ShowBoundingBox()
+{
+	if (enableBoundingBox)
+	{
+		DrawRectangleLines(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height, BLUE);
+	}
 }

@@ -10,6 +10,7 @@ public:
     void BeforeLoad() override;
     void Render(float dt) override;
     void Logic(float dt) override;
+    void Physics(float dt) override;
 
 private:
     bool m_isActive;
