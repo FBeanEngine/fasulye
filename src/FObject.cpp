@@ -48,6 +48,14 @@ void FObject::SetBoundingBox(float x, float y, float width, float height)
 	boundingBox = {x, y, width, height};
 }
 
+void FObject::UpdateBoundingBox(Rectangle nboundingBox)
+{
+	boundingBox.x = nboundingBox.x;
+	boundingBox.y = nboundingBox.y;
+	boundingBox.width = nboundingBox.width;
+	boundingBox.height = nboundingBox.height;
+}
+
 Rectangle FObject::GetBoundingBox()
 {
 	return boundingBox;

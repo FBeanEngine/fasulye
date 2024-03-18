@@ -78,7 +78,7 @@ FPlayer::FPlayer(Vector2 position)
 
     // ----- collision -----
     tag = "player";
-    SetBoundingBox(position.x, position.y + 12, 32, 32);
+    UpdateBoundingBox({position.x, position.y + 22.f, 32, 16});
     ActivateBoundingBox();
 
     // shader.FLoadShader("damage.fs", ShaderType::Fragment);
@@ -137,10 +137,6 @@ void FPlayer::Update(float dt)
     }
     canMove = {true, true, true, true};
 
-    // ----- update collision box -----
-    boundingBox.x = this->position.x;
-    boundingBox.y = this->position.y;
-
     float angle = Vector2LineAngle({this->position.x + 16, this->position.y + 16}, m_mousePosition) * 180 / PI + 180;
 
     // source: 8 direction movement angles from https://www.reddit.com/r/godot/comments/ypjiqs/it_might_be_helpful_360_degrees_for_godot_and_in/
@@ -181,21 +177,25 @@ void FPlayer::Update(float dt)
     {
         down_animation.BindAnimation("right");
         lastMovementDirection = "right";
+        UpdateBoundingBox({position.x, position.y + 22.f, 32, 16});
     }
     else if (movementVector.x < 0)
     {
         down_animation.BindAnimation("left");
         lastMovementDirection = "left";
+        UpdateBoundingBox({position.x, position.y + 22.f, 32, 16});
     }
     else if (movementVector.y < 0)
     {
         down_animation.BindAnimation("back");
         lastMovementDirection = "back";
+        UpdateBoundingBox({position.x + 10.f, position.y + 22.f, 16, 16});
     }
     else if (movementVector.y > 0)
     {
         down_animation.BindAnimation("forward");
         lastMovementDirection = "forward";
+        UpdateBoundingBox({position.x + 8.f, position.y + 22.f, 18, 16});
     }
     else
     {

@@ -6,7 +6,7 @@ FItem::FItem(Vector2 position, Texture2D texture)
 	this->texture = texture;
 
 	tag = "item";
-	SetBoundingBox(position.x, position.y, texture.width, texture.height);
+	SetBoundingBox(position.x + 2.f, position.y + 10.f, 28, 28);
 	ActivateBoundingBox();
 
 	FAnimationClip idle = FAnimationClip("resources/assets/chest.png", 1, 32, 38, 5, false, false);

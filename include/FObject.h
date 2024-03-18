@@ -17,6 +17,7 @@ public:
     void ActivateBoundingBox();
     void DeactivateBoundingBox();
     void SetBoundingBox(float x, float y, float width, float height);
+    void UpdateBoundingBox(Rectangle nboundingBox);
     Rectangle GetBoundingBox();
     std::string GetTag();
     void ShowBoundingBox();
