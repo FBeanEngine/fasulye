@@ -66,3 +66,13 @@ void FAnimation::BindAnimation(std::string animationName)
 	// std::cout << "EndBindAnimation: " << animationName << std::endl;
 	m_currentAnimation = animationName;
 }
+
+bool FAnimation::IsAnimationFinished(std::string animationName)
+{
+	FAnimationClip *clip = GetAnimation(animationName);
+	if (clip)
+	{
+		return clip->isFinished;
+	}
+	return true;
+}

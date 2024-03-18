@@ -14,6 +14,7 @@ public:
 
     void Animate(Vector2 position, float dt);
     void BindAnimation(std::string animationName);
+    bool IsAnimationFinished(std::string animationName);
 
 protected:
     std::vector<std::string> m_animationsNames;
