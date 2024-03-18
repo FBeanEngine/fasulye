@@ -6,10 +6,13 @@
 #include "FTestWorld.h"
 #include "FMainMenu.h"
 
-FGame::FGame()
+FGame::FGame(int width, int height)
 {
-    InitWindow(1280, 720, "FSun");
-    SetTargetFPS(120);
+    InitWindow(width, height, "FSun");
+    SetTargetFPS(240);
+
+    m_height = height;
+    m_width = width;
 
     std::unique_ptr<FScene> mainMenu = std::unique_ptr<FScene>(new FMainMenu());
     FSceneManager::AddScene(std::move(mainMenu));
@@ -70,5 +73,25 @@ void FGame::Run()
         DrawFPS(GetScreenWidth() / 6, GetScreenHeight() / 4);
 
         EndDrawing();
+
+        if (IsKeyPressed(KEY_F)) {
+            // see what display we are on right now
+ 			int display = GetCurrentMonitor();
+ 
+            
+            if (IsWindowFullscreen())
+            {
+                // if we are full screen, then go back to the windowed size
+                SetWindowSize(m_width, m_height);
+            }
+            else
+            {
+                // if we are not full screen, set the window size to match the monitor we are on
+                SetWindowSize(GetMonitorWidth(display), GetMonitorHeight(display));
+            }
+ 
+            // toggle the state
+ 			ToggleFullscreen();
+        }
     }
 }
