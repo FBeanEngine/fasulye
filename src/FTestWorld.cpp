@@ -1,4 +1,6 @@
 #include "FTestWorld.h"
+#include "FItem.h"
+#include "FSceneManager.h"
 #include <iostream>
 #include "utils.h"
 
@@ -16,6 +18,16 @@ void FTestWorld::Init()
 
 	red_sand_1 = LoadTexture("resources/assets/tiles/red_sand_1.png");
 	red_sand_2 = LoadTexture("resources/assets/tiles/red_sand_2.png");
+
+	std::cout << "FTestWorld Init" << std::endl;
+
+	std::unique_ptr<FItem> item = std::unique_ptr<FItem>(new FItem({static_cast<float>(GetScreenWidth() / 2), static_cast<float>(GetScreenHeight() / 2)}, LoadTexture("resources/assets/chest.png")));
+	FSceneManager::AddObjectToActiveScene(std::move(item));
+
+	std::cout << "FTestWorld Init" << std::endl;
+
+	std::unique_ptr<FItem> item2 = std::unique_ptr<FItem>(new FItem({static_cast<float>(GetScreenWidth() / 2) + 32, static_cast<float>(GetScreenHeight() / 2) + 32}, LoadTexture("resources/assets/chest.png")));
+	FSceneManager::AddObjectToActiveScene(std::move(item2));
 }
 
 void FTestWorld::BeforeLoad()
@@ -79,6 +91,7 @@ void FTestWorld::Render(float dt)
 	{
 		objects[i]->SetMousePosition(vec);
 		objects[i]->Draw(dt);
+		objects[i]->ShowBoundingBox();
 	}
 
 	this->player->SetMousePosition(vec);
@@ -106,4 +119,22 @@ void FTestWorld::Logic(float dt)
 		objects.erase(objects.begin() + destroyedObjects[i]);
 	}
 	destroyedObjects.clear();
+}
+
+void FTestWorld::Physics(float dt)
+{
+	for (int i = 0; i < objects.size() - 1; i++)
+	{
+		for (int j = 1; j < objects.size(); j++)
+		{
+			if (i != j)
+			{
+				if (CheckCollisionRecs(objects[i]->GetBoundingBox(), objects[j]->GetBoundingBox()))
+				{
+					objects[i]->Physics(objects[j]->GetTag());
+					objects[j]->Physics(objects[i]->GetTag());
+				}
+			}
+		}
+	}
 }
