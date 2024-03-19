@@ -3,6 +3,7 @@
 #include "FSceneManager.h"
 #include <iostream>
 #include "utils.h"
+#include "enums.h"
 
 FTestWorld::FTestWorld()
 {
@@ -16,8 +17,13 @@ void FTestWorld::Init()
 	camera.AddEffect(CameraEffect::NoneEffect);
 	camera.SetZoom(2.0f);
 
-	red_sand_1 = LoadTexture("resources/assets/tiles/red_sand_1.png");
-	red_sand_2 = LoadTexture("resources/assets/tiles/red_sand_2.png");
+	shader.FLoadShader("sandColor.fs", ShaderType::Fragment);
+	int tintColorLoc = GetShaderLocation(shader.m_shaders[0], "u_tintColor");
+	Vector3 tintColor = {1.0, 0.0, 0.0};
+	shader.FSetValue(0, tintColorLoc, &tintColor, SHADER_UNIFORM_VEC3);
+
+	red_sand_1 = LoadTexture("resources/assets/tiles/gray_sand_1.png");
+	red_sand_2 = LoadTexture("resources/assets/tiles/gray_sand_2.png");
 
 	std::cout << "FTestWorld Init" << std::endl;
 
@@ -62,6 +68,7 @@ void FTestWorld::Render(float dt)
 
 	Rectangle cameraBox = camera.GetCameraViewportAsRectangle();
 	DrawRectangle(cameraBox.x - 64, cameraBox.y - 64, cameraBox.width + 64, cameraBox.height + 64, BLUE);
+	BeginShaderMode(shader.m_shaders[0]);
 
 	for (int x = RoundAccordingToRef(cameraBox.x, 32); x < grid->GetWidth() * 32; x += 32)
 	{
@@ -86,6 +93,7 @@ void FTestWorld::Render(float dt)
 		if (x > (cameraBox.x + cameraBox.width + 64))
 			break;
 	}
+	EndShaderMode();
 
 	for (int i = 0; i < objects.size(); i++)
 	{
@@ -101,6 +109,16 @@ void FTestWorld::Render(float dt)
 
 void FTestWorld::Logic(float dt)
 {
+	if (IsKeyPressed(KEY_C))
+	{
+		int tintColorLoc = GetShaderLocation(shader.m_shaders[0], "u_tintColor");
+		float r = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+		float g = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+		float b = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+		Vector3 tintColor = {r, g, b};
+		shader.FSetValue(0, tintColorLoc, &tintColor, SHADER_UNIFORM_VEC3);
+	}
+
 	std::vector<int> destroyedObjects;
 	player->Update(dt);
 	for (int i = 0; i < objects.size(); i++)

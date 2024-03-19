@@ -1,5 +1,6 @@
 #pragma once
 #include "FScene.h"
+#include "FShader.h"
 
 class FTestWorld : public FScene
 {
@@ -17,6 +18,7 @@ private:
     bool m_isLoaded;
     std::string m_name;
     int m_index;
+    FShader shader;
     std::unique_ptr<FPlayer> player;
     std::unique_ptr<FGrid> grid;
     Texture2D red_sand_1;
