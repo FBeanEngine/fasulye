@@ -4,30 +4,20 @@ project(fasulye)
 set(CMAKE_BUILD_TYPE Debug)
 set(PROJECT_DIR ${CMAKE_SOURCE_DIR})
 
-set(PROJECT_INCLUDE_DIR ${PROJECT_DIR}/include)
+# Add Core directory
+add_subdirectory(Core)
 
-set(PROJECT_SOURCE_DIR ${PROJECT_DIR}/src)
+# Add Game directory
+add_subdirectory(Game)
 
-set(PROJECT_SOURCES 
-        ${PROJECT_SOURCE_DIR}/main.cpp
-        ${PROJECT_SOURCE_DIR}/FGame.cpp
-        ${PROJECT_SOURCE_DIR}/FGrid.cpp
-        ${PROJECT_SOURCE_DIR}/FItem.cpp
-        ${PROJECT_SOURCE_DIR}/FObject.cpp
-        ${PROJECT_SOURCE_DIR}/FPlayer.cpp
-        ${PROJECT_SOURCE_DIR}/FScene.cpp
-        ${PROJECT_SOURCE_DIR}/FSceneManager.cpp
-        ${PROJECT_SOURCE_DIR}/FInputManager.cpp
-        ${PROJECT_SOURCE_DIR}/FAnimation.cpp
-        ${PROJECT_SOURCE_DIR}/FAnimationClip.cpp
-        ${PROJECT_SOURCE_DIR}/FShader.cpp
-        ${PROJECT_SOURCE_DIR}/FGun.cpp
-        ${PROJECT_SOURCE_DIR}/FAmmo.cpp
-        ${PROJECT_SOURCE_DIR}/FCamera.cpp
-        ${PROJECT_SOURCE_DIR}/FTestWorld.cpp
-        ${PROJECT_SOURCE_DIR}/FMainMenu.cpp
-        ${PROJECT_SOURCE_DIR}/utils.cpp)
+# Define project sources
+set(PROJECT_SOURCES main.cpp)
 
+# Add executable target
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+
+# Link libraries
+target_link_libraries(${PROJECT_NAME} Core Game)
 
 # Dependencies
 include(FetchContent)
@@ -41,9 +31,7 @@ FetchContent_Declare(
 set(BUILD_EXAMPLES OFF CACHE INTERNAL "")
 FetchContent_MakeAvailable(raylib)
 
-include_directories(${PROJECT_INCLUDE_DIR})
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
-
+# Copy resources to binary directory
 file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/resources)
 add_custom_target(copy_resources ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -51,11 +39,12 @@ add_custom_target(copy_resources ALL
         ${PROJECT_BINARY_DIR}/resources
         COMMENT "Copying resources into binary directory")
 
-add_dependencies(fasulye copy_resources)
+add_dependencies(${PROJECT_NAME} copy_resources)
 
+# Link raylib library
 target_link_libraries(${PROJECT_NAME} raylib)
 
-# Checks if OSX and links appropriate frameworks (Only required on MacOS)
+# Additional settings for macOS
 if (APPLE)
     target_link_libraries(${PROJECT_NAME} "-framework IOKit")
     target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
