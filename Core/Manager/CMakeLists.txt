@@ -1,7 +1,8 @@
 set(manager_sources
-    src/FObject.cpp
-    src/FScene.cpp
-    src/FUI.cpp
+    src/FCamera.cpp
+    src/FCanvas.cpp
+    src/FInputManager.cpp
+    src/FSceneManager.cpp
 )
 
 # Add library target
