@@ -1,8 +1,6 @@
-# Include Animation
+# Add subdirectories
 add_subdirectory(Animation)
-# Include Base
 add_subdirectory(Base)
-# Include Managers
 add_subdirectory(Manager)
 
 # Add source files
@@ -10,11 +8,16 @@ set(core_sources
     src/FGame.cpp
     src/FGrid.cpp
     src/FShader.cpp
-    src/utils.cpp
 )
 
 # Add library target
 add_library(Core ${core_sources})
 
 # Include directories
-target_include_directories(Core PUBLIC include)
+target_link_libraries(Core PUBLIC Animation Base Manager Scenes)
+
+add_dependencies(Core raylib Global)
+target_link_libraries(Core PRIVATE raylib Global Player)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(Core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

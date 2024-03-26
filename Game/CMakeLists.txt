@@ -1,15 +1,16 @@
-# Include Player
+# Add subdirectories
 add_subdirectory(Player)
-# Include Scenes
 add_subdirectory(Scenes)
 
 # Add source files
 set(game_sources
-    src/FItem.cpp
+    src/empty.cpp
 )
 
 # Add library target
 add_library(Game ${game_sources})
 
 # Include directories
-target_include_directories(Game PUBLIC include)
+target_link_libraries(Game PUBLIC Player Scenes Global)
+
+target_include_directories(Game PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

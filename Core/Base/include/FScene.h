@@ -1,11 +1,8 @@
 #pragma once
 #include <vector>
-#include "enums.h"
 #include "raylib.h"
 #include "FObject.h"
-#include "FPlayer.h"
 #include "FCamera.h"
-#include "FGrid.h"
 #include <memory>
 
 class FScene
@@ -25,6 +22,5 @@ public:
     virtual void Render(float dt);
 
 protected:
-    SceneType type;
     std::vector<std::unique_ptr<FObject>> objects;
 };

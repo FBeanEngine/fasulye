@@ -23,7 +23,7 @@ std::vector<FUIEvent> FCanvas::Draw()
 
 int FCanvas::AddUIComponent(std::unique_ptr<FUI> component)
 {
-    m_ui.push_back(component);
+    m_ui.push_back(std::move(component));
     return m_ui.size() - 1;
 }
 

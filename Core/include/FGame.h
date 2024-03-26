@@ -1,6 +1,6 @@
 #pragma once
-
 #include "FSceneManager.h"
+
 class FGame
 {
 public:

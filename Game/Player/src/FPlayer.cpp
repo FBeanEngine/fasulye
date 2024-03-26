@@ -7,6 +7,7 @@
 #include "FShader.h"
 #include "FSceneManager.h"
 #include "raymath.h"
+
 FPlayer::FPlayer(Vector2 position)
 {
     this->position = position;

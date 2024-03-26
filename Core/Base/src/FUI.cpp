@@ -10,7 +10,7 @@ FUI::FUI(Vector2 position, Vector2 size, std::string name)
 
 FUIEvent FUI::Logic()
 {
-    uiState = UIComponentState::None;
+    uiState = UIComponentState::NoneEvent;
     Vector2 mousePosition = FInputManager::GetMouse();
 
     if (CheckCollisionPointRec(mousePosition, {m_position.x, m_position.y, m_size.x, m_size.y}))

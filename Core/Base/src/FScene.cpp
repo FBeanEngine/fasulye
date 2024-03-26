@@ -1,8 +1,7 @@
 #include "FScene.h"
 #include "FObject.h"
-#include "FPlayer.h"
 #include "raylib.h"
-#include "utils.h"
+#include "FUtils.h"
 #include "FSceneManager.h"
 #include <iostream>
 #include <memory>

@@ -4,21 +4,6 @@ project(fasulye)
 set(CMAKE_BUILD_TYPE Debug)
 set(PROJECT_DIR ${CMAKE_SOURCE_DIR})
 
-# Add Core directory
-add_subdirectory(Core)
-
-# Add Game directory
-add_subdirectory(Game)
-
-# Define project sources
-set(PROJECT_SOURCES main.cpp)
-
-# Add executable target
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
-
-# Link libraries
-target_link_libraries(${PROJECT_NAME} Core Game)
-
 # Dependencies
 include(FetchContent)
 
@@ -31,6 +16,24 @@ FetchContent_Declare(
 set(BUILD_EXAMPLES OFF CACHE INTERNAL "")
 FetchContent_MakeAvailable(raylib)
 
+add_subdirectory(Global)
+
+# Add Core directory
+add_subdirectory(Core)
+
+# Add Game directory
+add_subdirectory(Game)
+
+
+# Define project sources
+set(PROJECT_SOURCES main.cpp)
+
+# Add executable target
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+
+# Link libraries
+target_link_libraries(${PROJECT_NAME} Global Core Game raylib)
+
 # Copy resources to binary directory
 file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/resources)
 add_custom_target(copy_resources ALL
@@ -41,8 +44,6 @@ add_custom_target(copy_resources ALL
 
 add_dependencies(${PROJECT_NAME} copy_resources)
 
-# Link raylib library
-target_link_libraries(${PROJECT_NAME} raylib)
 
 # Additional settings for macOS
 if (APPLE)

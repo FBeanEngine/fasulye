@@ -7,5 +7,10 @@ set(base_sources
 # Add library target
 add_library(Base ${base_sources})
 
+add_dependencies(Base raylib Global Manager)
+target_link_libraries(Base PRIVATE raylib Core Global Manager)
+
 # Include directories
-target_include_directories(Base PUBLIC include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(Base PRIVATE $<TARGET_PROPERTY:Manager,INTERFACE_INCLUDE_DIRECTORIES>)
+target_include_directories(Base PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

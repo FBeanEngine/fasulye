@@ -1,6 +1,8 @@
 #pragma once
 #include "FScene.h"
 #include "FShader.h"
+#include "FPlayer.h"
+#include "FGrid.h"
 
 class FTestWorld : public FScene
 {
